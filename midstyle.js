@@ -1,4 +1,6 @@
 (function(){
+	updateGravatarImages()
+	updateAddresses()
 	makeSymbolsClickable()
 	allowUpdate()
 })()
@@ -36,6 +38,57 @@ function hideUpdateButtons(){
 	}
 }
 
-function cryptoEmail() {
-	var hash = CryptoJS.MD5(email)
+function updateGravatarImages(){
+	var leftGravatars = document.getElementsByClassName('gravatar-left')
+	var rightGravatars = document.getElementsByClassName('gravatar-right')
+	for (var i=0; i<leftGravatars.length; i++){
+		oldSrc = leftGravatars[i].src
+		leftGravatars[i].src = oldSrc.replace('00000000000000000000000000000000',hash(findEmail1()))
+	}
+	for (var i=0; i<rightGravatars.length; i++){
+		oldSrc = rightGravatars[i].src
+		rightGravatars[i].src = oldSrc.replace('00000000000000000000000000000000',hash(findEmail2()))
+	}
+}
+
+function updateGravatarImages(){
+	var leftGravatars = document.getElementsByClassName('gravatar-left')
+	var rightGravatars = document.getElementsByClassName('gravatar-right')
+	for (var i=0; i<leftGravatars.length; i++){
+		oldSrc = leftGravatars[i].src
+		leftGravatars[i].src = oldSrc.replace('00000000000000000000000000000000',hash(findEmail1()))
+	}
+	for (var i=0; i<rightGravatars.length; i++){
+		oldSrc = rightGravatars[i].src
+		rightGravatars[i].src = oldSrc.replace('00000000000000000000000000000000',hash(findEmail2()))
+	}
+}
+
+function findEmail1(){
+	return window.location.search.match(/email1=([^&]*)&/)[1].replace('%40','@')
+}
+
+function findEmail2(){
+	return window.location.search.match(/email2=([^&]*)&/)[1].replace('%40','@')
+}
+
+function findAddress1(){
+	var commified = window.location.search.match(/address1=([^&]*)&/)[1].replace(/%2C/g,',')
+	return commified.split('+').join(' ')
+}
+
+function findAddress2(){
+	var commified = window.location.search.match(/address2=([^&]*)/)[1].replace(/%2C/g,',')
+	return commified.split('+').join(' ')
+}
+
+function updateAddresses(){
+	document.getElementById('address1').value = findAddress1()
+	document.getElementById('address1-mobile').value = findAddress1()
+	document.getElementById('address2').value = findAddress2()
+	document.getElementById('address2-mobile').value = findAddress2()
+}
+
+function hash(email) {
+	return calcMD5(email)
 }
