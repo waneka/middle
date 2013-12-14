@@ -1,22 +1,35 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <style type="text/css">
-      html { height: 100% }
-      body { height: 100%; margin: 0; padding: 0 }
-      #map-canvas { height: 100% }
-    </style>
-  </head>
-  <body>
-    <div id="map-canvas">
-    </div>
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDCwXP9-a3APjPk44T037SGJo_b4wVcCNs&sensor=false"></script>
-    <script src='js/map.js'></script>
-    <script src='js/app.js'></script>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Middle</title>
+  <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+  <link href="layout.css" rel="stylesheet" type="text/css">
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+</head>
+<body>
+  <div class='the-whole-page'>
+      <div class="header">
+        <h1>the<span class="red">somewhere</span>middle</h1>
+        <h2>
+          <span class="red">somewhere</span>
+          <span class="grey">in</span>
+          the middle
+        </h2>
+      </div>
+      <form action="middle.html" method="get">
+        <div id='form-left' class='left'>
+            Email: <input id='email1' type='text' name='email1' placeholder='name@example.com'><br>
+            Street Address: <input id='location1' type='text' name='address1' placeholder='123 Main St'>
+          </div>
+        <div id='form-middle' class='middle'>
+        <input type='submit' value='Meet!'>
+        </div>
+        <div class='right' id='form-right'>
+            Email: <input id='email2' type='text' name='email2' placeholder='name@example.com'><br>
+            Street Address: <input id='location2' type='text' name='address2' placeholder='123 Main St'>
+        </div>
+      </form>
+  </div>
+</body>
 </html>
-
-
-
