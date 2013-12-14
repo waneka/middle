@@ -35,3 +35,7 @@ function hideUpdateButtons(){
 		updates[i].classList.add('hidden')
 	}
 }
+
+function cryptoEmail() {
+	var hash = CryptoJS.MD5(email)
+}
