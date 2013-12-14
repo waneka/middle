@@ -1,9 +1,3 @@
-$(document).ready(function(){
-  GMap.initialize()
-  GMap.findLatLong('717 california st, san francisco')
-  GMap.findLatLong('Mission, san francisco')
-})
-
 var GMap = {
   geocoder: new google.maps.Geocoder(),
   startingpoints: [],
