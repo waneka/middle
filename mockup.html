@@ -2,31 +2,33 @@
 <head>
 	<link href="layout.css" rel="stylesheet" type="text/css">
 	<title>Mockup Of Some Stuff</title>
-	  <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0PYiBp3-fcC2iTKWlcvRIR07sZ4xDNaY&sensor=false">
-    </script>
-    <script type="text/javascript">
-      function initialize() {
-        var mapOptions = {
-          center: new google.maps.LatLng(37.783,-122.417),
-          zoom: 12
-        };
-        var map = new google.maps.Map(document.getElementById("map-canvas"),
-            mapOptions);
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0PYiBp3-fcC2iTKWlcvRIR07sZ4xDNaY&sensor=false">
+  </script>
+  <script type="text/javascript">
+    function initialize() {
+      var mapOptions = {
+        center: new google.maps.LatLng(37.783,-122.417),
+        zoom: 12
+      };
+      var map = new google.maps.Map(document.getElementById("map-canvas"),
+          mapOptions);
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
 </head>
 <body>
+  <div id="header">
+  	<h1>the<span class="red">somewhere</span>middle</h1>
+		<h2><span class="red">somewhere</span> <span class="grey">in</span> the middle</h2>
+	</div>
   <div id="the-whole-page">
-	  <div id="header">
-	  	<h1><style "color:grey;">the</style><style "color: red;">somewhere</style><style "color:grey;">middle.com</style></h1>
-			<p>This is the header</p>
-		</div>
   	<div class="user left">
   		<p>Left Side</p>
-  		<textarea id="address1" placeholder="Person 1 Address"></textarea><br>
+  		<textarea id="address1" placeholder="Person 1 Address"></textarea>
   		<button>Update Address</button>
+  		<div class="directions1 hidden"></div>
   	</div>
   	<div class="find middle">
   		<p>Middle</p>
@@ -36,8 +38,21 @@
   	</div>
   	<div class="user right">
   		<p>Right</p>
+  		<textarea id="address2" placeholder="Person 2 Address"></textarea>
+  		<button>Update Address</button>
+  		<div class="directions2 hidden"></div>
+  	</div>
+  	<div class="user mobile-left">
+  		<p>Left Side</p>
+  		<textarea id="address1" placeholder="Person 1 Address"></textarea><br>
+  		<button>Update Address</button>
+  		<div class="directions1 hidden"></div>
+  	</div>
+  	<div class="user mobile-right">
+  		<p>Right</p>
   		<textarea id="address2" placeholder="Person 2 Address"></textarea><br>
   		<button>Update Address</button>
+  		<div class="directions2 hidden"></div>
   	</div>
   </div>
 </body>
