@@ -54,7 +54,6 @@ body{
 
 .update{
 	width:100%;
-	display:none;
 }
 
 .left, .middle, .right{
@@ -111,6 +110,10 @@ button{
 	font-family: 'Raleway', sans-serif;
 }
 
+button:focus{
+	outline:none;
+}
+
 button.update-button{
 	display:block;
 	margin: 0 auto;
@@ -125,10 +128,15 @@ button.symbol{
 button.symbol:hover{
 	background-color: #af0000;
 	border: 1px #580000 solid;
-	transition:1s;
+	transition: 1s;
 }
 
 button.symbol-active{
+	border:1px #106099 solid;
+	background-color:#2980BB;
+}
+
+button.symbol-active:hover{
 	border:1px #106099 solid;
 	background-color:#2980BB;
 }
@@ -172,11 +180,19 @@ button.symbol-active{
 		display:inline-block;
 		vertical-align: top;
 		text-align: left;
-		width:60%;
+		width:50%;
 		height:80px;
 	}
 
+	.update{
+		float:right;
+		vertical-align:top;
+		width:10%;
+	}
+
 	button.update-button{
-		float:left;
+		vertical-align:top;
+		display:inline-block;
+		height:80px;
 	}
 }
