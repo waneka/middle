@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<head>
+	<title>theSOMEWHEREmiddle</title>
+	<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+	<link href="layout.css" rel="stylesheet" type="text/css">
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0PYiBp3-fcC2iTKWlcvRIR07sZ4xDNaY&sensor=false">
+  </script>
+  <script type="text/javascript">
+    function initialize() {
+      var mapOptions = {
+        center: new google.maps.LatLng(37.783,-122.417),
+        zoom: 12
+      };
+      var map = new google.maps.Map(document.getElementById("map-canvas"),
+          mapOptions);
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+</head>
+<body>
+  <div id="the-whole-page">
+  	<div class="user left">
+  		<img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=http://slacktiverse.files.wordpress.com/2013/03/fuzzy-white-kitten-with-stubby-legs-from-sam_ayye-sam-pertsas.jpg" alt="Left Side User" class="gravatar">
+  		<textarea id="address1" placeholder="Person 1 Address"></textarea>
+  		<div class="update">
+	  		<button class="update-button">Update Address</button>
+	  	</div>
+  		<div class="directions1 hidden"></div>
+  	</div>
+  	<div class="find middle">
+  		<div class="header">
+		  	<h1>the<span class="red">somewhere</span>middle</h1>
+				<h2>
+					<span class="red">somewhere</span> 
+					<span class="grey">in</span> 
+					the middle
+				</h2>
+			</div>
+  		<div class="button-holder-wide">
+  			<div class="button-holder">
+	  			<button class="symbol"><i class="fa fa-coffee"></i></button>
+	  		  <button class="symbol"><i class="fa fa-cutlery"></i></button>
+	  		  <button class="symbol"><i class="fa fa-glass"></i></button>
+  			</div>
+  		</div>
+  		<div id="map-canvas">	
+  		</div>
+  	</div>
+  	<div class="user right">
+  		<img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=http://i.dailymail.co.uk/i/pix/2012/07/03/article-2168112-13E70C13000005DC-867_964x946.jpg" alt="Right Side User" class="gravatar">
+  		<textarea id="address2" placeholder="Person 2 Address"></textarea>
+  		<div class="update">
+	  		<button class="update-button">Update Address</button>
+	  	</div>
+  		<div class="directions2 hidden"></div>
+  	</div>
+  	<div class="user mobile-left">
+  		<img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=http://slacktiverse.files.wordpress.com/2013/03/fuzzy-white-kitten-with-stubby-legs-from-sam_ayye-sam-pertsas.jpg" alt="Left Side User" class="gravatar">
+  		<textarea id="address1-mobile" placeholder="Person 1 Address"></textarea>
+  		<div class="update">
+	  	  <button class="update-button">Update Address</button>
+	    </div>
+  		<div class="directions1 hidden"></div>
+  	</div>
+  	<div class="user mobile-right">
+  		<img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=http://i.dailymail.co.uk/i/pix/2012/07/03/article-2168112-13E70C13000005DC-867_964x946.jpg" alt="Right Side User" class="gravatar">
+  		<textarea id="address2-mobile" placeholder="Person 2 Address"></textarea>
+  		<div class="update">
+	  	  <button class="update-button">Update Address</button>
+	    </div>
+  		<div class="directions2 hidden"></div>
+  	</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,182 @@
+h1, h2{
+	text-align: center;
+	margin:0;
+	padding:0;
+}
+
+h1{
+	font-size: 2em;
+}
+
+h2{
+	font-size: 1.5em;
+	font-weight:lighter;
+}
+
+.red{
+	color:#af0000;
+}
+
+.grey{
+	color:#999999;
+}
+
+body{
+	margin:0;
+	padding:0;
+	font-family: 'Raleway', sans-serif;
+}
+
+#the-whole-page{
+	position:absolute;
+	width:100%;
+	height:500px;
+	margin:0 auto;
+}
+
+.button-holder-wide{
+	position:relative;
+	display:block;
+	width:100%;
+	margin:0;
+}
+
+.button-holder{
+	width:100px;
+	display:block;
+	margin:0 auto 10px auto;
+}
+
+#map-canvas{
+	display:block;
+	height:80%;
+}
+
+.update{
+	width:100%;
+	display:none;
+}
+
+.left, .middle, .right{
+	height:100%;
+	width:20%;
+}
+
+.left{
+	display: block;
+	float: left;
+}
+
+.gravatar{
+	width:100px;
+	height:100px;
+	display:block;
+	margin: 0 auto;
+}
+
+.middle{
+	display: block;
+	width: 60%;
+	float: left;
+}
+
+.right{
+	float: left;
+	margin: auto auto auto 0;
+}
+
+.hidden, .mobile-left, .mobile-right{
+	display:none;
+}
+
+textarea{
+	width:90%;
+	display:block;
+	margin: 0 auto 5px auto;
+	resize:none;
+	border:0;
+	text-align:center;
+	font-family: 'Raleway', sans-serif;
+}
+
+button{
+	border:1px #394748 solid;
+	background-color:#7f8c8d;
+	-webkit-box-shadow:none;
+	-moz-box-shadow:none;
+	box-shadow:none;
+	margin: 0 auto;
+	padding: 5px 8px;
+	color:white;
+	font-family: 'Raleway', sans-serif;
+}
+
+button.update-button{
+	display:block;
+	margin: 0 auto;
+}
+
+button.symbol{
+	margin:0px;
+	width:30px;
+	height:30px;
+}
+
+button.symbol:hover{
+	background-color: #af0000;
+	border: 1px #580000 solid;
+	transition:1s;
+}
+
+button.symbol-active{
+	border:1px #106099 solid;
+	background-color:#2980BB;
+}
+
+@media (max-width:600px){
+	h1{
+		font-size:1.5em;
+	}
+	h2{
+		font-size:1em;
+	}
+}
+
+@media (max-width:500px){
+	.middle{
+		display:block;
+		width:100%;
+		min-height:300px;
+		margin:0;
+		padding:0;
+  }
+
+  .left, .right{
+		display:none;
+  }
+
+  .mobile-left, .mobile-right{
+  	display:block;
+  	width:100%;
+  	margin: 0 auto;
+  }
+
+  .gravatar{
+		width:100px;
+		height:100px;
+		display:inline-block;
+		vertical-align: top;
+	}
+
+	textarea{
+		display:inline-block;
+		vertical-align: top;
+		text-align: left;
+		width:60%;
+		height:80px;
+	}
+
+	button.update-button{
+		float:left;
+	}
+}
