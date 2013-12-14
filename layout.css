@@ -17,12 +17,13 @@ h2{
 }
 
 .grey{
-	color:#343434;
+	color:#999999;
 }
 
 body{
 	margin:0;
 	padding:0;
+	font-family: 'Raleway', sans-serif;
 }
 
 div#the-whole-page{
@@ -36,7 +37,7 @@ div#the-whole-page{
 	height:80%;
 }
 
-#header{
+.update{
 	width:100%;
 	display:block;
 }
@@ -68,6 +69,25 @@ div#the-whole-page{
 
 textarea{
 	width:90%;
+	display:block;
+	margin: 0 auto 5px auto;
+	resize:none;
+	border:0;
+}
+
+button{
+	border:1px #106099 solid;
+	background-color:#2980BB;
+	-webkit-box-shadow:none;
+	-moz-box-shadow:none;
+	box-shadow:none;
+	margin: 0 auto;
+	padding: 5px 8px;
+	color:white;
+	font-family: 'Raleway', sans-serif;
+}
+
+button.update-button{
 	display:block;
 	margin: 0 auto;
 }
