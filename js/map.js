@@ -1,97 +1,96 @@
 $(document).ready(function(){
-  initialize()
-  findLatLong('717 california st, san francisco')
-  findLatLong('Mission, san francisco')
+  GMap.initialize()
+  GMap.findLatLong('717 california st, san francisco')
+  GMap.findLatLong('Mission, san francisco')
 })
 
-var geocoder = new google.maps.Geocoder()
-var map, middle;
-var centerpoint = {
-  points: []
-};
+var GMap = {
+  geocoder: new google.maps.Geocoder(),
+  startingpoints: [],
 
-function initialize() {
-  var mapOptions = {
-    center: new google.maps.LatLng(37.7833, -122.4167),
-    zoom: 12
-  };
-  map = new google.maps.Map(document.getElementById("map-canvas"),
-      mapOptions);
-}
+  initialize: function() {
+    var mapOptions = {
+      center: new google.maps.LatLng(37.7833, -122.4167),
+      zoom: 12
+    };
+    this.gmap = new google.maps.Map(document.getElementById("map-canvas"),
+        mapOptions);
+  },
 
-function findLatLong(address){
-  geocoder.geocode( { 'address': address }, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-      var latLng = results[0].geometry.location
-      centerpoint.points.push(latLng)
-      var marker = new google.maps.Marker({
-          map: map,
-          position: latLng
-      })
-    } else {
-      alert("Geocode was not successful for the following reason: " + status);
+  findLatLong: function(address){
+    var that = this;
+    this.geocoder.geocode( { 'address': address }, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        var latLng = results[0].geometry.location
+        that.startingpoints.push(latLng)
+        var marker = new google.maps.Marker({
+            map: that.gmap,
+            position: latLng
+        })
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+      that.recenterMap()
+    })
+  },
+
+  findTheMiddle: function(){
+    return {
+      lat: (this.startingpoints[0].nb + this.startingpoints[1].nb)/2,
+      lng: (this.startingpoints[0].ob + this.startingpoints[1].ob)/2
     }
-    recenterMap()
-  })
-}
+  },
 
-function findTheMiddle(){
-  return {
-    lat: (centerpoint.points[0].nb + centerpoint.points[1].nb)/2,
-    lng: (centerpoint.points[0].ob + centerpoint.points[1].ob)/2
-  }
-}
-
-function recenterMap(){
-  if (centerpoint.points.length == 2){
-    var midPoint = findTheMiddle()
-    middle = new google.maps.LatLng(midPoint.lat, midPoint.lng)
-    map.setCenter(middle)
-    populateTheMiddle()
-  }
-}
-
-function populateTheMiddle(types){
-  var types = types || ['cafe']
-  map.setZoom(14) //temp hardcode
-
-  var requestOptions = {
-    location: middle,
-    radius: '500',
-    types: types,
-  }
-
-  var service = new google.maps.places.PlacesService(map)
-  service.nearbySearch(requestOptions, createMarkers)
-}
-
-function createMarkers(results, status) {
-  console.log(results)
-  if (status == "ZERO_RESULTS"){
-    alert("No results found")
-  }
-  if (status == google.maps.places.PlacesServiceStatus.OK) {
-    for (var i = 0; i < results.length; i++) {
-      var place = results[i];
-      createMarker(results[i]);
+  recenterMap: function(){
+    if (this.startingpoints.length == 2){
+      var midPoint = this.findTheMiddle()
+      themiddle = new google.maps.LatLng(midPoint.lat, midPoint.lng)
+      this.gmap.setCenter(themiddle)
+      this.populateTheMiddle()
     }
-  }
-  resizeMap()
-}
+  },
 
-function createMarker(place) {
-  var placeLoc = place.geometry.location;
-  var marker = new google.maps.Marker({
-    map: map,
-    position: place.geometry.location
-  });
+  populateTheMiddle: function(types){
+    var types = types || ['cafe']
+    this.gmap.setZoom(14) //temp hardcode
 
-  google.maps.event.addListener(marker, 'click', function() {
-    infowindow.setContent(place.name);
-    infowindow.open(map, this);
-  });
-}
+    var requestOptions = {
+      location: themiddle,
+      radius: '500',
+      types: types,
+    }
 
-function resizeMap(markers){
-  //reset zoom level
+    var service = new google.maps.places.PlacesService(this.gmap)
+    service.nearbySearch(requestOptions, this.createMarkers)
+  },
+
+  createMarkers: function(results, status) {
+    if (status == "ZERO_RESULTS"){
+      alert("No results found")
+    }
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+      for (var i = 0; i < results.length; i++) {
+        var place = results[i];
+        GMap.createMarker(results[i]);
+      }
+    }
+    //resizeMap()
+  },
+
+  createMarker: function(place) {
+    var placeLoc = place.geometry.location;
+    var marker = new google.maps.Marker({
+      map: this.gmap,
+      position: place.geometry.location
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.setContent(place.name);
+      infowindow.open(this.gmap, this);
+    });
+  },
+
+  // resizeMap: function(markers){
+  //   //reset zoom level
+  // }
 }
