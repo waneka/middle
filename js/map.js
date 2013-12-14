@@ -5,7 +5,7 @@ $(document).ready(function(){
 })
 
 var geocoder = new google.maps.Geocoder()
-var map;
+var map, middle;
 var centerpoint = {
   points: []
 };
@@ -28,12 +28,10 @@ function findLatLong(address){
           map: map,
           position: latLng
       })
-      if (centerpoint.points.length == 2){
-        populateTheMiddle()
-      }
     } else {
       alert("Geocode was not successful for the following reason: " + status);
     }
+    recenterMap()
   })
 }
 
@@ -44,16 +42,23 @@ function findTheMiddle(){
   }
 }
 
+function recenterMap(){
+  if (centerpoint.points.length == 2){
+    var midPoint = findTheMiddle()
+    middle = new google.maps.LatLng(midPoint.lat, midPoint.lng)
+    map.setCenter(middle)
+    populateTheMiddle()
+  }
+}
+
 function populateTheMiddle(types){
   var types = types || ['cafe']
-  var midPoint = findTheMiddle()
-  var middle = new google.maps.LatLng(midPoint.lat, midPoint.lng)
-  map.setCenter(middle)
+  map.setZoom(14) //temp hardcode
 
   var requestOptions = {
     location: middle,
     radius: '500',
-    types: types
+    types: types,
   }
 
   var service = new google.maps.places.PlacesService(map)
@@ -61,8 +66,32 @@ function populateTheMiddle(types){
 }
 
 function createMarkers(results, status) {
-  if (status == "ZERO_RESULTS"){
-    alert("no results found")
-  }
   console.log(results)
+  if (status == "ZERO_RESULTS"){
+    alert("No results found")
+  }
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      var place = results[i];
+      createMarker(results[i]);
+    }
+  }
+  resizeMap()
+}
+
+function createMarker(place) {
+  var placeLoc = place.geometry.location;
+  var marker = new google.maps.Marker({
+    map: map,
+    position: place.geometry.location
+  });
+
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.setContent(place.name);
+    infowindow.open(map, this);
+  });
+}
+
+function resizeMap(markers){
+  //reset zoom level
 }
