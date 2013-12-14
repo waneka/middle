@@ -27,7 +27,7 @@ body{
 	font-family: 'Raleway', sans-serif;
 }
 
-#the-whole-page{
+.the-whole-page{
 	position:absolute;
 	width:100%;
 	height:500px;
@@ -39,12 +39,11 @@ body{
 	display:block;
 	width:100%;
 	margin:0;
+	text-align: center;
 }
 
 .button-holder{
-	width:100px;
-	display:block;
-	margin:0 auto 10px auto;
+	margin:10px auto 20px auto;
 }
 
 #map-canvas{
@@ -57,6 +56,13 @@ body{
 	display:none;
 }
 
+.gravatar{
+	width:100px;
+	height:100px;
+	display:block;
+	margin: 0 auto;
+}
+
 .left, .middle, .right{
 	height:100%;
 	width:20%;
@@ -65,13 +71,6 @@ body{
 .left{
 	display: block;
 	float: left;
-}
-
-.gravatar{
-	width:100px;
-	height:100px;
-	display:block;
-	margin: 0 auto;
 }
 
 .middle{
@@ -89,6 +88,48 @@ body{
 	display:none;
 }
 
+#form-left {
+	display: block;
+	float: left;
+	width: 45%;
+	text-align: center;
+}
+
+#form-right {
+	float: left;
+	margin: auto auto auto 0;
+	text-align: center;
+	width: 45%;
+}
+
+#form-middle {
+	width: 10%;
+	text-align: center;
+}
+
+form {
+	margin-top: 20px;
+}
+
+input[type='text'] {
+	margin: 0 0 10px 0;
+}
+
+input[type='submit'] {
+	border:1px #7f8c8d solid;
+	background-color:#7f8c8d;
+	-webkit-box-shadow:none;
+	-moz-box-shadow:none;
+	box-shadow:none;
+	margin: 0 auto;
+	padding: 5px 8px;
+	color:white;
+	font-family: 'Raleway', sans-serif;
+	width: 150px;
+	height: 50px;
+	font-size: 2em;
+}
+
 textarea{
 	width:90%;
 	display:block;
@@ -100,7 +141,7 @@ textarea{
 }
 
 button{
-	border:1px #394748 solid;
+	border:1px #7f8c8d solid;
 	background-color:#7f8c8d;
 	-webkit-box-shadow:none;
 	-moz-box-shadow:none;
@@ -117,9 +158,10 @@ button.update-button{
 }
 
 button.symbol{
-	margin:0px;
-	width:30px;
-	height:30px;
+	margin:0px 10px 0px 10px;
+	width:50px;
+	height:50px;
+	font-size: x-large;
 }
 
 button.symbol:hover{
