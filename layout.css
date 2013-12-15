@@ -21,6 +21,11 @@ h2{
 	color:#999999;
 }
 
+.meet-me{
+	width:;
+	margin: 0 auto;
+}
+
 body{
 	margin:0;
 	padding:0;
@@ -72,6 +77,11 @@ body{
 	float: left;
 }
 
+.meet-me{
+	width:100%;
+	text-align:center;
+}
+
 .middle{
 	display: block;
 	width: 60%;
@@ -87,22 +97,22 @@ body{
 	display:none;
 }
 
-#form-left {
+.form-left {
 	display: block;
 	float: left;
-	width: 45%;
+	width: 35%;
 	text-align: center;
 }
 
-#form-right {
+.form-right {
 	float: left;
 	margin: auto auto auto 0;
 	text-align: center;
-	width: 45%;
+	width: 35%;
 }
 
-#form-middle {
-	width: 10%;
+.form-middle {
+	width: 30%;
 	text-align: center;
 }
 
@@ -186,19 +196,31 @@ button.symbol-active{
 	h2{
 		font-size:1em;
 	}
+	.form-left, .form-middle, .form-right{
+		width:100%;
+		float:none;
+		margin: 20px 0;
+	}
 }
 
 @media (max-width:500px){
+	#map-canvas{
+		height:70%;
+	}
+
 	.middle{
 		display:block;
 		width:100%;
-		min-height:300px;
 		margin:0;
 		padding:0;
   }
 
   .left, .right{
 		display:none;
+  }
+
+  .form-left, .form-right{
+  	display:block;
   }
 
   .mobile-left, .mobile-right{
