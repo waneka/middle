@@ -68,7 +68,10 @@ var GMap = {
         GMap.createMarker(results[i]);
       }
     }
+<<<<<<< HEAD
+=======
     //resizeMap()
+>>>>>>> master
   },
 
   createMarker: function(place) {
@@ -83,8 +86,11 @@ var GMap = {
       infowindow.open(this.gmap, this);
     });
   },
+<<<<<<< HEAD
+=======
 
   // resizeMap: function(markers){
   //   //reset zoom level
   // }
+>>>>>>> master
 }

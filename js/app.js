@@ -1,7 +1,3 @@
-$(document).ready(function(){
-  App.init(GMap)
-})
-
 var App = {
   init: function(gmap){
     this.gmap = gmap
@@ -11,4 +7,8 @@ var App = {
     this.gmap.findLatLong(location1)
     this.gmap.findLatLong(location2)
   }
+}
+
+window.onload = function(){
+  App.init(GMap)
 }
