@@ -193,6 +193,10 @@ button.symbol-active{
 	background-color:#2980BB;
 }
 
+.transit{
+	text-align: center;
+}
+
 @media (max-width:600px){
 	h1{
 		font-size:1.5em;

@@ -2,6 +2,7 @@
 	updateGravatarImages()
 	updateAddresses()
 	makeSymbolsClickable()
+	makeTransitClickable()
 	allowUpdate()
 })()
 
@@ -33,6 +34,18 @@ function toggleActive(e){
 		GMap.populateTheMiddle(locationType)
 	}
 	console.log(GMap.locationTypes)
+}
+
+function makeTransitClickable(){
+	var buttons = document.querySelectorAll('.transit')
+	for (var i=0; i<buttons.length; i++){
+		buttons[i].addEventListener('click',toggleTransit)
+	}
+}
+
+function toggleTransit(e){
+	var transitType = e.target.dataset.id
+	console.log(transitType)
 }
 
 function showUpdateButtons(){
