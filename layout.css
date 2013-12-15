@@ -154,6 +154,20 @@ textarea{
 	font-size:1em;
 }
 
+.directions1 {
+	margin: 10px;
+}
+
+.directions2 {
+	margin: 10px;
+}
+.directions1m {
+	margin: 10px;
+}
+.directions2m {
+	margin: 10px;
+}
+
 button{
 	border:1px #7f8c8d solid;
 	background-color:#7f8c8d;
