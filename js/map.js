@@ -83,6 +83,11 @@ var GMap = {
     }
   },
 
+  displayDirections: function(el,renderer){
+    el.innerHTML=""
+    renderer.setPanel(el)
+  },
+
   createMarker: function(place) {
     var placeLoc = place.geometry.location;
     var marker = new google.maps.Marker({
@@ -92,6 +97,42 @@ var GMap = {
     var infowindow = new google.maps.InfoWindow({content:place.name})
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.open(GMap.gmap, marker);
+      var directionsDisplay1 = new google.maps.DirectionsRenderer()
+      var directionsDisplay2 = new google.maps.DirectionsRenderer()
+      var directionsDisplay1m = new google.maps.DirectionsRenderer()
+      var directionsDisplay2m = new google.maps.DirectionsRenderer()
+      var directions1 = document.getElementsByClassName('directions1')[0]
+      var directions2 = document.getElementsByClassName('directions2')[0]
+      var directions1m = document.getElementsByClassName('directions1-mobile')[0]
+      var directions2m = document.getElementsByClassName('directions2-mobile')[0]
+      GMap.displayDirections(directions1,directionsDisplay1)
+      GMap.displayDirections(directions2,directionsDisplay2)
+      GMap.displayDirections(directions1m,directionsDisplay1m)
+      GMap.displayDirections(directions2m,directionsDisplay2m)
+      var request1 = {
+        origin: document.getElementById('address1').value,
+        destination: place.vicinity,
+        travelMode: google.maps.TravelMode.DRIVING
+      }
+      var directionsService1 = new google.maps.DirectionsService()
+      directionsService1.route(request1,function(response,status){
+        if (status== google.maps.DirectionsStatus.OK){
+          directionsDisplay1.setDirections(response)
+          directionsDisplay1m.setDirections(response)
+        }
+      })
+      var directionsService2 = new google.maps.DirectionsService()
+      var request2 = {
+        origin: document.getElementById('address2').value,
+        destination: place.vicinity,
+        travelMode: google.maps.TravelMode.DRIVING
+      }
+      directionsService2.route(request2,function(response,status){
+        if (status== google.maps.DirectionsStatus.OK){
+          directionsDisplay2.setDirections(response)
+          directionsDisplay2m.setDirections(response)
+        }
+      })
     });
   },
 }
