@@ -89,9 +89,49 @@ var GMap = {
       map: this.gmap,
       position: place.geometry.location
     });
-    var infowindow = new google.maps.InfoWindow({content:place.name})
+    var allTheInfo = "<p>" + place.name + "</p>"
+    allTheInfo += "<a href='http://maps.google.com/?saddr="
+    allTheInfo += window.location.search.match(/address1=([^&]*)&/)[1]
+    allTheInfo += "&daddr=" + place.vicinity.split(' ').join('+').replace(/,/g,'%2C')
+    allTheInfo += "'><button>Directions From Address 1</button></a><br>"
+    allTheInfo += "<a href='http://maps.google.com/?saddr="
+    allTheInfo += window.location.search.match(/address2=([^&]*)/)[1]
+    allTheInfo += "&daddr=" + place.vicinity.split(' ').join('+').replace(/,/g,'%2C')
+    allTheInfo += "'><button>Directions From Address 2</button></a>"
+    var infowindow = new google.maps.InfoWindow({content:allTheInfo})
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.open(GMap.gmap, marker);
+      // var directionsDisplay1 = new google.maps.DirectionsRenderer()
+      // var directionsDisplay2 = new google.maps.DirectionsRenderer()
+      // var directionsDisplay1m = new google.maps.DirectionsRenderer()
+      // var directionsDisplay2m = new google.maps.DirectionsRenderer()
+      // var directions1 = document.getElementsByClassName('directions1')[0]
+      // var directions2 = document.getElementsByClassName('directions2')[0]
+      // var directions1m = document.getElementsByClassName('directions1-mobile')[0]
+      // var directions2m = document.getElementsByClassName('directions2-mobile')[0]
+      // directions1.classList.remove('hidden')
+      // directions2.classList.remove('hidden')
+      // directions1m.classList.remove('hidden')
+      // directions2m.classList.remove('hidden')
+      // var request = {
+      //   origin: document.getElementById('address1').value,
+      //   destination: place.vicinity,
+      //   travelMode: google.maps.TravelMode.DRIVING
+      // }
+      // var directionsService = new google.maps.DirectionsService()
+      // directionsService.route(request,function(response,status){
+      //   if (status== google.maps.DirectionsStatus.OK){
+      //     directionsDisplay1.setDirections(response)
+      //     directionsDisplay1m.setDirections(response)
+      //   }
+      // })
+      // request.origin = document.getElementById('address2').value
+      // directionsService.route(request,function(response,status){
+      //   if (status== google.maps.DirectionsStatus.OK){
+      //     directionsDisplay2.setDirections(response)
+      //     directionsDisplay2m.setDirections(response)
+      //   }
+      // })
     });
   },
 }
