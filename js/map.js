@@ -1,6 +1,7 @@
 var GMap = {
   geocoder: new google.maps.Geocoder(),
   startingpoints: [],
+  locationTypes: ['cafe'],
 
   initialize: function() {
     var mapOptions = {
@@ -44,18 +45,30 @@ var GMap = {
     }
   },
 
-  populateTheMiddle: function(types){
-    var types = types || ['cafe']
+  resetMap: function(){
     this.gmap.setZoom(14) //temp hardcode
 
-    var requestOptions = {
-      location: themiddle,
-      radius: '500',
-      types: types,
-    }
+    var mapOptions = {
+      center: themiddle,
+      zoom: 14
+    };
 
-    var service = new google.maps.places.PlacesService(this.gmap)
-    service.nearbySearch(requestOptions, this.createMarkers)
+    this.gmap = new google.maps.Map(document.getElementById("map-canvas"),
+        mapOptions);
+  },
+
+  populateTheMiddle: function(){
+    this.resetMap()
+    if (this.locationTypes.length > 0){
+      var requestOptions = {
+        location: themiddle,
+        radius: '500',
+        types: this.locationTypes,
+      }
+
+      var service = new google.maps.places.PlacesService(this.gmap)
+      service.nearbySearch(requestOptions, this.createMarkers)
+    }
   },
 
   createMarkers: function(results, status) {
@@ -77,10 +90,9 @@ var GMap = {
       map: this.gmap,
       position: place.geometry.location
     });
-
+    var infowindow = new google.maps.InfoWindow({content:place.name})
     google.maps.event.addListener(marker, 'click', function() {
-      infowindow.setContent(place.name);
-      infowindow.open(this.gmap, this);
+      infowindow.open(GMap.gmap, marker);
     });
   },
 

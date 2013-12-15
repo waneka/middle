@@ -22,6 +22,17 @@ function allowUpdate(){
 
 function toggleActive(e){
 	e.target.classList.toggle('symbol-active')
+	var locationType = e.target.dataset.id
+	if (e.target.classList.contains('symbol-active')){
+		GMap.locationTypes.push(locationType)
+		GMap.populateTheMiddle(locationType)
+	} else {
+		var i = GMap.locationTypes.indexOf(locationType)
+		console.log(i)
+		GMap.locationTypes.splice(i,1)
+		GMap.populateTheMiddle(locationType)
+	}
+	console.log(GMap.locationTypes)
 }
 
 function showUpdateButtons(){
