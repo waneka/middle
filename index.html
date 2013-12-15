@@ -1,12 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Middle</title>
-  </head>
-  <body>
-    <h1>Middle</h1>
-    <script src="http://codeorigin.jquery.com/jquery-2.0.3.js"></script>
-    <script src='js/app.js'></script>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <title>Middle</title>
+  <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+  <link href="layout.css" rel="stylesheet" type="text/css">
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+</head>
+<body>
+  <div class='the-whole-page'>
+      <div class="header">
+        <h1>the<span class="red">somewhere</span>middle</h1>
+        <h2>
+          <span class="red">somewhere</span>
+          <span class="grey">in</span>
+          the middle
+        </h2>
+      </div>
+      <form action="middle.html" method="get">
+        <div class='left form-left'>
+            Email: <input id='email1' type='text' name='email1' placeholder='name@example.com'><br>
+            Street Address: <input id='location1' type='text' name='address1' placeholder='123 Main St'>
+          </div>
+        <div class='middle form-middle'>
+          <div class="meet-me">
+            <input type='submit' value='Meet!'>
+          </div>
+        </div>
+        <div class='right form-right'>
+            Email: <input id='email2' type='text' name='email2' placeholder='name@example.com'><br>
+            Street Address: <input id='location2' type='text' name='address2' placeholder='123 Main St'>
+        </div>
+      </form>
+  </div>
+</body>
 </html>
