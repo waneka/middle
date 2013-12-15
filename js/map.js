@@ -83,6 +83,11 @@ var GMap = {
     }
   },
 
+  displayDirections: function(el,renderer){
+    el.innerHTML=""
+    renderer.setPanel(el)
+  },
+
   createMarker: function(place) {
     var placeLoc = place.geometry.location;
     var marker = new google.maps.Marker({
@@ -100,32 +105,29 @@ var GMap = {
       var directions2 = document.getElementsByClassName('directions2')[0]
       var directions1m = document.getElementsByClassName('directions1-mobile')[0]
       var directions2m = document.getElementsByClassName('directions2-mobile')[0]
-      directions1.innerHTML=""
-      directions2.innerHTML=""
-      directions1m.innerHTML=""
-      directions2m.innerHTML=""
-      directionsDisplay1.setPanel(directions1)
-      directionsDisplay1m.setPanel(directions1m)
-      directionsDisplay2.setPanel(directions2)
-      directionsDisplay2m.setPanel(directions2m)
-      directions1.classList.remove('hidden')
-      directions2.classList.remove('hidden')
-      directions1m.classList.remove('hidden')
-      directions2m.classList.remove('hidden')
-      var request = {
+      GMap.displayDirections(directions1,directionsDisplay1)
+      GMap.displayDirections(directions2,directionsDisplay2)
+      GMap.displayDirections(directions1m,directionsDisplay1m)
+      GMap.displayDirections(directions2m,directionsDisplay2m)
+      var request1 = {
         origin: document.getElementById('address1').value,
         destination: place.vicinity,
         travelMode: google.maps.TravelMode.DRIVING
       }
-      var directionsService = new google.maps.DirectionsService()
-      directionsService.route(request,function(response,status){
+      var directionsService1 = new google.maps.DirectionsService()
+      directionsService1.route(request1,function(response,status){
         if (status== google.maps.DirectionsStatus.OK){
           directionsDisplay1.setDirections(response)
           directionsDisplay1m.setDirections(response)
         }
       })
-      request.origin = document.getElementById('address2').value
-      directionsService.route(request,function(response,status){
+      var directionsService2 = new google.maps.DirectionsService()
+      var request2 = {
+        origin: document.getElementById('address2').value,
+        destination: place.vicinity,
+        travelMode: google.maps.TravelMode.DRIVING
+      }
+      directionsService2.route(request2,function(response,status){
         if (status== google.maps.DirectionsStatus.OK){
           directionsDisplay2.setDirections(response)
           directionsDisplay2m.setDirections(response)
