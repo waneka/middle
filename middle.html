@@ -5,20 +5,6 @@
 	<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 	<link href="layout.css" rel="stylesheet" type="text/css">
 	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-  <script type="text/javascript"
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0PYiBp3-fcC2iTKWlcvRIR07sZ4xDNaY&sensor=false">
-  </script>
-  <script type="text/javascript">
-    function initialize() {
-      var mapOptions = {
-        center: new google.maps.LatLng(37.783,-122.417),
-        zoom: 12
-      };
-      var map = new google.maps.Map(document.getElementById("map-canvas"),
-          mapOptions);
-    }
-    google.maps.event.addDomListener(window, 'load', initialize);
-  </script>
 </head>
 <body>
   <div class="the-whole-page">
@@ -75,5 +61,10 @@
   	</div>
   </div>
 </body>
-<script type="text/javascript" src="midstyle.js"></script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDCwXP9-a3APjPk44T037SGJo_b4wVcCNs&sensor=false"></script>
+<script src='js/map.js'></script>
+<script src='js/app.js'></script>
+<script type="text/javascript" src="js/midstyle.js"></script>
 </html>
