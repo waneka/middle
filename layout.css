@@ -154,17 +154,7 @@ textarea{
 	font-size:1em;
 }
 
-.directions1 {
-	margin: 10px;
-}
-
-.directions2 {
-	margin: 10px;
-}
-.directions1m {
-	margin: 10px;
-}
-.directions2m {
+.directions1, .directions2, .directions1m, .directions2m {
 	margin: 10px;
 }
 
