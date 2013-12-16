@@ -135,16 +135,16 @@ var GMap = {
       })
       var allTheInfo1 = "<a href='mailto:" + findEmail1() + "?subject=Meet+Me&"
       allTheInfo1 += "body=%3Ca href=%27http%3A%2F%2Fmaps.google.com/?saddr="
-      allTheInfo1 += window.location.search.match(/address1=([^&]*)&/)[1] 
-      allTheInfo1 += "%26daddr="+ place.vicinity.split(' ').join('+') + "%27%3E"
+      allTheInfo1 += window.location.search.match(/address1=([^&]*)&/)[1].replace(/\+/g, '%2B')
+      allTheInfo1 += "%26daddr="+ place.vicinity.replace(/\s/g, '%2B') + "%27%3E"
       allTheInfo1 += "Directions%3C%2Fa%3E'>"
       allTheInfo1 += "Email Directions<a>"
       directions1.innerHTML = directions1.innerHTML + allTheInfo1
       directions1m.innerHTML = directions1m.innerHTML + allTheInfo1
       var allTheInfo2 = "<a href='mailto:" + findEmail2() + "?subject=Meet+Me&"
       allTheInfo2 += "body=%3Ca href=%27http%3A%2F%2Fmaps.google.com/?saddr="
-      allTheInfo2 += window.location.search.match(/address2=([^&]*)/)[1] 
-      allTheInfo2 += "%26daddr="+ place.vicinity.split(' ').join('+') + "%27%3E"
+      allTheInfo2 += window.location.search.match(/address2=([^&]*)/)[1].replace(/\+/g,'%2B')
+      allTheInfo2 += "%26daddr="+ place.vicinity.replace(/\s/g, '%2B') + "%27%3E"
       allTheInfo2 += "Directions%3C%2Fa%3E'>"
       allTheInfo2 += "Email Directions<a>"
       directions2.innerHTML = directions2.innerHTML + allTheInfo2
