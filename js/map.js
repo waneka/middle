@@ -150,13 +150,11 @@ var GMap = {
   },
 
   constructMailToLinks: function(directionsTarget, place){
-    var emails = [findEmail1(), findEmail2()]
-    var addresses = [findAddress1(), findAddress2()]
-    for (i = 0; i < emails.length; i++){
+    for (i = 0; i < 2; i++){
       x = i+1
-      var mailto = "<a href='mailto:" + emails[i] + "?subject=Meet+Me&"
+      var mailto = "<a href='mailto:" + App.user.email[i] + "?subject=Meet+Me&"
       mailto += "body=http%3A%2F%2Fmaps.google.com/?saddr="
-      mailto += addresses[i].replace(/\s/g, '%2B')
+      mailto += App.user.address[i].replace(/\s/g, '%2B')
       mailto += "%26daddr="+ place.vicinity.replace(/\s/g, '%2B') + "'>Email Directions<a>"
       directionsTarget[x].innerHTML = directionsTarget[x].innerHTML + mailto
       directionsTarget.mobile[x].innerHTML = directionsTarget.mobile[x].innerHTML + mailto
