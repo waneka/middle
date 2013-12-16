@@ -1,7 +1,13 @@
 ##Middle
-Find a central meeting place between two people.
+Find a central meeting place. Given your current location and the location of a friend, search for cafes, restaurants and/or bars in the area between you. Clicking on a map pin displays two sets of directions for getting there (one for each of you). You can also click to email driving directions to your friend. Middle won "Best Overall" at the 2013 Dev Bootcamp Holiday Hackathon.
 
-link: [middle](http://waneka.github.io/middle)
+Demo it here: http://waneka.github.io/middle
+
+####Technologies:
+* Javascript, HTML, CSS
+* Google Maps API, Places Library, and Directions Service
+* Gravatar
+* Font Awesome Icons
 
 ####Development:
 In development, run a local server, for instance:
