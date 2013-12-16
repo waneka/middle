@@ -1,4 +1,9 @@
 var App = {
+  user: {
+    email: [findEmail1(), findEmail2()],
+    address: [findAddress1(), findAddress2()]
+  },
+
   init: function(gmap){
     this.gmap = gmap
     this.gmap.initialize()
