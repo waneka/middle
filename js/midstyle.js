@@ -62,19 +62,6 @@ function updateGravatarImages(){
 	}
 }
 
-function updateGravatarImages(){
-	var leftGravatars = document.getElementsByClassName('gravatar-left')
-	var rightGravatars = document.getElementsByClassName('gravatar-right')
-	for (var i=0; i<leftGravatars.length; i++){
-		oldSrc = leftGravatars[i].src
-		leftGravatars[i].src = oldSrc.replace('00000000000000000000000000000000',hash(findEmail1()))
-	}
-	for (var i=0; i<rightGravatars.length; i++){
-		oldSrc = rightGravatars[i].src
-		rightGravatars[i].src = oldSrc.replace('00000000000000000000000000000000',hash(findEmail2()))
-	}
-}
-
 function findEmail1(){
 	return window.location.search.match(/email1=([^&]*)&/)[1].replace('%40','@')
 }
