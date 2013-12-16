@@ -150,17 +150,17 @@ var GMap = {
   },
 
   constructMailToLinks: function(directionsTarget, place){
-    var mailto1 = "<a href='mailto:" + findEmail1() + "?subject=Meet+Me&"
-    mailto1 += "body=http%3A%2F%2Fmaps.google.com/?saddr="
-    mailto1 += window.location.search.match(/address1=([^&]*)&/)[1].replace(/\+/g, '%2B')
-    mailto1 += "%26daddr="+ place.vicinity.replace(/\s/g, '%2B') + "'>Email Directions<a>"
-    directionsTarget[1].innerHTML = directionsTarget[1].innerHTML + mailto1
-    directionsTarget.mobile[1].innerHTML = directionsTarget.mobile[1].innerHTML + mailto1
-    var mailto2 = "<a href='mailto:" + findEmail2() + "?subject=Meet+Me&"
-    mailto2 += "body=http%3A%2F%2Fmaps.google.com/?saddr="
-    mailto2 += window.location.search.match(/address2=([^&]*)/)[1].replace(/\+/g,'%2B')
-    mailto2 += "%26daddr="+ place.vicinity.replace(/\s/g, '%2B') + "'>Email Directions<a>"
-    directionsTarget[2].innerHTML = directionsTarget[2].innerHTML + mailto2
-    directionsTarget.mobile[2].innerHTML = directionsTarget.mobile[2].innerHTML + mailto2
-  }
+    var emails = [findEmail1(), findEmail2()]
+    var addresses = [findAddress1(), findAddress2()]
+    for (i = 0; i < emails.length; i++){
+      x = i+1
+      var mailto = "<a href='mailto:" + emails[i] + "?subject=Meet+Me&"
+      mailto += "body=http%3A%2F%2Fmaps.google.com/?saddr="
+      mailto += addresses[i].replace(/\s/g, '%2B')
+      mailto += "%26daddr="+ place.vicinity.replace(/\s/g, '%2B') + "'>Email Directions<a>"
+      directionsTarget[x].innerHTML = directionsTarget[x].innerHTML + mailto
+      directionsTarget.mobile[x].innerHTML = directionsTarget.mobile[x].innerHTML + mailto
+    } 
+  },
+
 }
