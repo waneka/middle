@@ -1,7 +1,7 @@
 var App = {
   user: {
-    email: [findEmail1(), findEmail2()],
-    address: [findAddress1(), findAddress2()]
+    email: [null, findEmail1(), findEmail2()],
+    address: [null, findAddress1(), findAddress2()]
   },
 
   init: function(gmap){

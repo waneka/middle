@@ -146,19 +146,15 @@ var GMap = {
         directionsDisplay2m.setDirections(response)
       }
     })
-    this.constructMailToLinks(directionsTarget, place)
   },
 
-  constructMailToLinks: function(directionsTarget, place){
-    for (i = 0; i < 2; i++){
-      x = i+1
-      var mailto = "<a href='mailto:" + App.user.email[i] + "?subject=Meet+Me&"
-      mailto += "body=http%3A%2F%2Fmaps.google.com/?saddr="
-      mailto += App.user.address[i].replace(/\s/g, '%2B')
-      mailto += "%26daddr="+ place.vicinity.replace(/\s/g, '%2B') + "'>Email Directions<a>"
-      directionsTarget[x].innerHTML = directionsTarget[x].innerHTML + mailto
-      directionsTarget.mobile[x].innerHTML = directionsTarget.mobile[x].innerHTML + mailto
-    } 
+  constructMailToLinks: function(place, directionsTarget, x){
+    var mailto = "<a href='mailto:" + App.user.email[x] + "?subject=Meet+Me&"
+    mailto += "body=http%3A%2F%2Fmaps.google.com/?saddr="
+    mailto += App.user.address[x].replace(/\s/g, '%2B')
+    mailto += "%26daddr="+ place.vicinity.replace(/\s/g, '%2B') + "'>Email Directions<a>"
+    directionsTarget[x].innerHTML = directionsTarget[x].innerHTML + mailto
+    directionsTarget.mobile[x].innerHTML = directionsTarget.mobile[x].innerHTML + mailto
   },
 
 }
