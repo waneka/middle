@@ -119,10 +119,10 @@ var GMap = {
       }
     }
 
-    GMap.displayDirections(directionsTarget[1],directionsDisplay[1])
-    GMap.displayDirections(directionsTarget[2],directionsDisplay[2])
-    GMap.displayDirections(directionsTarget.mobile[1],directionsDisplay.mobile[1])
-    GMap.displayDirections(directionsTarget.mobile[2],directionsDisplay.mobile[2])
+    this.displayDirections(directionsTarget[1],directionsDisplay[1])
+    this.displayDirections(directionsTarget[2],directionsDisplay[2])
+    this.displayDirections(directionsTarget.mobile[1],directionsDisplay.mobile[1])
+    this.displayDirections(directionsTarget.mobile[2],directionsDisplay.mobile[2])
     
     this.getDirections(place, directionsDisplay, 1)
     this.getDirections(place, directionsDisplay, 2)
