@@ -1,4 +1,5 @@
 var Midstyle = {
+	
 	init: function(){
 		this.updateGravatarImages()
 		this.updateAddresses()
@@ -59,17 +60,6 @@ var Midstyle = {
 			oldSrc = rightGravatars[i].src
 			rightGravatars[i].src = oldSrc.replace('00000000000000000000000000000000',this.hash(App.user.email[2]))
 		}
-	},
-
-	findEmail: function(n){
-		var email = RegExp("email" + n + "=([^&]*)")
-		return window.location.search.match(email)[1].replace('%40','@')
-	},
-
-	findAddress: function(n){
-		var address = RegExp("address" + n + "=([^&]*)")
-		var commified = window.location.search.match(address)[1].replace(/%2C/g,',')
-		return commified.split('+').join(' ')
 	},
 
 	updateAddresses: function(){
