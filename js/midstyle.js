@@ -30,11 +30,9 @@ function toggleActive(e){
 		GMap.populateTheMiddle(locationType)
 	} else {
 		var i = GMap.locationTypes.indexOf(locationType)
-		console.log(i)
 		GMap.locationTypes.splice(i,1)
 		GMap.populateTheMiddle(locationType)
 	}
-	console.log(GMap.locationTypes)
 }
 
 function showUpdateButtons(){
