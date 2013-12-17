@@ -96,11 +96,11 @@ var GMap = {
     var that = this
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.open(GMap.gmap, marker);
-      that.getDirections(place)
+      that.createDirections(place)
     })
   },
 
-  getDirections: function(place){
+  createDirections: function(place){
     var directionsTarget = {
       1: document.getElementsByClassName('directions1')[0],
       2: document.getElementsByClassName('directions2')[0],
@@ -124,13 +124,13 @@ var GMap = {
     GMap.displayDirections(directionsTarget.mobile[1],directionsDisplay.mobile[1])
     GMap.displayDirections(directionsTarget.mobile[2],directionsDisplay.mobile[2])
     
-    this.requestDirections(place, directionsDisplay, 1)
-    this.requestDirections(place, directionsDisplay, 2)
+    this.getDirections(place, directionsDisplay, 1)
+    this.getDirections(place, directionsDisplay, 2)
     this.constructMailToLinks(place, directionsTarget, 1)
     this.constructMailToLinks(place, directionsTarget, 2)
   },
 
-  requestDirections: function(place, directionsDisplay, x){
+  getDirections: function(place, directionsDisplay, x){
     var directionsService = new google.maps.DirectionsService()
     var request = {
       origin: document.getElementById('address' + x).value,
