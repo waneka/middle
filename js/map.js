@@ -83,11 +83,6 @@ var GMap = {
     }
   },
 
-  displayDirections: function(el,renderer){
-    el.innerHTML=""
-    renderer.setPanel(el)
-  },
-
   createMarker: function(place) {
     var marker = new google.maps.Marker({
       map: this.gmap,
@@ -148,6 +143,11 @@ var GMap = {
         directionsDisplay.mobile[x].setDirections(response)
       }
     })
+  },
+
+  displayDirections: function(el,renderer){
+    el.innerHTML=""
+    renderer.setPanel(el)
   },
 
   constructMailToLinks: function(place, directionsTarget, x){
