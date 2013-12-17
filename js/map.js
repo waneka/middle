@@ -114,36 +114,38 @@ var GMap = {
         2: document.getElementsByClassName('directions2-mobile')[0]
       },
     }
-    var directionsDisplay1 = new google.maps.DirectionsRenderer()
-    var directionsDisplay2 = new google.maps.DirectionsRenderer()
-    var directionsDisplay1m = new google.maps.DirectionsRenderer()
-    var directionsDisplay2m = new google.maps.DirectionsRenderer()
-    GMap.displayDirections(directionsTarget[1],directionsDisplay1)
-    GMap.displayDirections(directionsTarget[2],directionsDisplay2)
-    GMap.displayDirections(directionsTarget.mobile[1],directionsDisplay1m)
-    GMap.displayDirections(directionsTarget.mobile[2],directionsDisplay2m)
-    var request1 = {
-      origin: document.getElementById('address1').value,
-      destination: place.vicinity,
-      travelMode: google.maps.TravelMode.DRIVING
-    }
-    var directionsService1 = new google.maps.DirectionsService()
-    directionsService1.route(request1,function(response,status){
-      if (status== google.maps.DirectionsStatus.OK){
-        directionsDisplay1.setDirections(response)
-        directionsDisplay1m.setDirections(response)
+
+    var directionsDisplay = {
+      1: new google.maps.DirectionsRenderer(),
+      2: new google.maps.DirectionsRenderer(),
+      mobile: {
+        1: new google.maps.DirectionsRenderer(),
+        2: new google.maps.DirectionsRenderer()
       }
-    })
-    var directionsService2 = new google.maps.DirectionsService()
-    var request2 = {
-      origin: document.getElementById('address2').value,
+    }
+
+    GMap.displayDirections(directionsTarget[1],directionsDisplay[1])
+    GMap.displayDirections(directionsTarget[2],directionsDisplay[2])
+    GMap.displayDirections(directionsTarget.mobile[1],directionsDisplay.mobile[1])
+    GMap.displayDirections(directionsTarget.mobile[2],directionsDisplay.mobile[2])
+    
+    this.requestDirections(place, directionsDisplay, 1)
+    this.requestDirections(place, directionsDisplay, 2)
+    this.constructMailToLinks(place, directionsTarget, 1)
+    this.constructMailToLinks(place, directionsTarget, 2)
+  },
+
+  requestDirections: function(place, directionsDisplay, x){
+    var directionsService = new google.maps.DirectionsService()
+    var request = {
+      origin: document.getElementById('address' + x).value,
       destination: place.vicinity,
       travelMode: google.maps.TravelMode.DRIVING
     }
-    directionsService2.route(request2,function(response,status){
+    directionsService.route(request,function(response,status){
       if (status== google.maps.DirectionsStatus.OK){
-        directionsDisplay2.setDirections(response)
-        directionsDisplay2m.setDirections(response)
+        directionsDisplay[x].setDirections(response)
+        directionsDisplay.mobile[x].setDirections(response)
       }
     })
   },
