@@ -1,9 +1,11 @@
-(function(){
-	updateGravatarImages()
-	updateAddresses()
-	makeSymbolsClickable()
-	allowUpdate()
-})()
+var Midstyle = {
+	init: function(){
+		updateGravatarImages()
+		updateAddresses()
+		makeSymbolsClickable()
+		allowUpdate()
+	}
+}
 
 function makeSymbolsClickable(){
 	var symbols = document.getElementsByClassName('symbol')
@@ -54,11 +56,11 @@ function updateGravatarImages(){
 	var rightGravatars = document.getElementsByClassName('gravatar-right')
 	for (var i=0; i<leftGravatars.length; i++){
 		oldSrc = leftGravatars[i].src
-		leftGravatars[i].src = oldSrc.replace('00000000000000000000000000000000',hash(findEmail1()))
+		leftGravatars[i].src = oldSrc.replace('00000000000000000000000000000000',hash(App.user.email[1]))
 	}
 	for (var i=0; i<rightGravatars.length; i++){
 		oldSrc = rightGravatars[i].src
-		rightGravatars[i].src = oldSrc.replace('00000000000000000000000000000000',hash(findEmail2()))
+		rightGravatars[i].src = oldSrc.replace('00000000000000000000000000000000',hash(App.user.email[2]))
 	}
 }
 
@@ -74,10 +76,10 @@ function findAddress(n){
 }
 
 function updateAddresses(){
-	document.getElementById('address1').value = findAddress1()
-	document.getElementById('address1-mobile').value = findAddress1()
-	document.getElementById('address2').value = findAddress2()
-	document.getElementById('address2-mobile').value = findAddress2()
+	document.getElementById('address1').value = App.user.address[1]
+	document.getElementById('address1-mobile').value = App.user.address[1]
+	document.getElementById('address2').value = App.user.address[2]
+	document.getElementById('address2-mobile').value = App.user.address[2]
 }
 
 function hash(email) {
