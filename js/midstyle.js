@@ -62,21 +62,14 @@ function updateGravatarImages(){
 	}
 }
 
-function findEmail1(){
-	return window.location.search.match(/email1=([^&]*)&/)[1].replace('%40','@')
+function findEmail(n){
+	var email = RegExp("email" + n + "=([^&]*)")
+	return window.location.search.match(email)[1].replace('%40','@')
 }
 
-function findEmail2(){
-	return window.location.search.match(/email2=([^&]*)&/)[1].replace('%40','@')
-}
-
-function findAddress1(){
-	var commified = window.location.search.match(/address1=([^&]*)&/)[1].replace(/%2C/g,',')
-	return commified.split('+').join(' ')
-}
-
-function findAddress2(){
-	var commified = window.location.search.match(/address2=([^&]*)/)[1].replace(/%2C/g,',')
+function findAddress(n){
+	var address = RegExp("address" + n + "=([^&]*)")
+	var commified = window.location.search.match(address)[1].replace(/%2C/g,',')
 	return commified.split('+').join(' ')
 }
 
