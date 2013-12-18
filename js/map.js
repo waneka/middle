@@ -39,8 +39,8 @@ var GMap = {
   recenterMap: function(){
     if (this.startingpoints.length == 2){
       var midPoint = this.findTheMiddle()
-      themiddle = new google.maps.LatLng(midPoint.lat, midPoint.lng)
-      this.gmap.setCenter(themiddle)
+      this.themiddle = new google.maps.LatLng(midPoint.lat, midPoint.lng)
+      this.gmap.setCenter(this.themiddle)
       this.populateTheMiddle()
     }
   },
@@ -49,7 +49,7 @@ var GMap = {
     this.gmap.setZoom(14) //temp hardcode
 
     var mapOptions = {
-      center: themiddle,
+      center: this.themiddle,
       zoom: 14
     };
 
@@ -61,7 +61,7 @@ var GMap = {
     this.resetMap()
     if (this.locationTypes.length > 0){
       var requestOptions = {
-        location: themiddle,
+        location: this.themiddle,
         radius: '500',
         types: this.locationTypes,
       }
