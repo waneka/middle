@@ -1,8 +1,8 @@
 var Midstyle = {
-	
+
 	init: function(){
 		this.updateGravatarImages()
-		this.updateAddresses()
+		this.setAddresses()
 		this.makeSymbolsClickable()
 		this.allowUpdate()
 	},
@@ -62,7 +62,7 @@ var Midstyle = {
 		}
 	},
 
-	updateAddresses: function(){
+	setAddresses: function(){
 		document.getElementById('address1').value = App.user.address[1]
 		document.getElementById('address1-mobile').value = App.user.address[1]
 		document.getElementById('address2').value = App.user.address[2]
