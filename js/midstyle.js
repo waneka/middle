@@ -4,7 +4,7 @@ var Midstyle = {
 		this.updateGravatarImages()
 		this.setAddresses()
 		this.makeSymbolsClickable()
-		this.allowUpdate()
+		this.updateAddress()
 	},
 
 	makeSymbolsClickable: function(){
@@ -14,12 +14,15 @@ var Midstyle = {
 		}
 	},
 
-	allowUpdate: function(){
-		var textareas = document.getElementsByTagName('textarea')
-		for (var i=0; i<textareas.length; i++){
-			textareas[i].addEventListener('focusin',this.showUpdateButtons)
-			textareas[i].addEventListener('focusout',this.hideUpdateButtons)
+	updateAddress: function() {
+		var updateButtons = document.getElementsByClassName('update-button')
+		for (var i=0; i < updateButtons.length; i++) {
+			updateButtons[i].addEventListener('click', this.updateTheMap)
 		}
+	},
+
+	updateTheMap: function() {
+		GMap.updateMap()
 	},
 
 	toggleActive: function(e){
@@ -32,20 +35,6 @@ var Midstyle = {
 			var i = GMap.locationTypes.indexOf(locationType)
 			GMap.locationTypes.splice(i,1)
 			GMap.populateTheMiddle(locationType)
-		}
-	},
-
-	showUpdateButtons: function(){
-		var updates = document.getElementsByClassName('update')
-		for (var i=0; i<updates.length; i++){
-			updates[i].classList.remove('hidden')
-		}
-	},
-
-	hideUpdateButtons: function(){
-		var updates = document.getElementsByClassName('update')
-		for (var i=0; i<updates.length; i++){
-			updates[i].classList.add('hidden')
 		}
 	},
 

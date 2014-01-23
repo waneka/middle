@@ -146,9 +146,9 @@ input[type='submit'] {
 textarea{
 	width:90%;
 	display:block;
-	margin: 0 auto 5px auto;
+	margin: 5px auto 5px auto;
 	resize:none;
-	border:0;
+	border: solid 1px;
 	text-align:center;
 	font-family: 'Raleway', sans-serif;
 	font-size:1em;
