@@ -19,6 +19,6 @@ python -m SimpleHTTPServer
 ####Deploying to production:
 To deploy the code, you must push the code to a branch called gh-pages. Simply run the following command:
 
-''''
+````
 git push origin master:gh-pages
-''''
+````
