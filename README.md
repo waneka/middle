@@ -15,3 +15,10 @@ In development, run a local server, for instance:
 ```
 python -m SimpleHTTPServer
 ```
+
+####Deploying to production:
+To deploy the code, you must push the code to a branch called gh-pages. Simply run the following command:
+
+''''
+git push origin master:gh-pages
+''''
