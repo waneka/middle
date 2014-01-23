@@ -1,7 +1,7 @@
 var GMap = {
   geocoder: new google.maps.Geocoder(),
-  startingpoints: [],
   locationTypes: ['cafe'],
+  startingpoints: [],
 
   initialize: function() {
     var mapOptions = {
@@ -14,6 +14,7 @@ var GMap = {
 
   findLatLong: function(address){
     var that = this;
+    that.startingpoints = []
     this.geocoder.geocode( { 'address': address }, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         var latLng = results[0].geometry.location
@@ -69,6 +70,13 @@ var GMap = {
       var service = new google.maps.places.PlacesService(this.gmap)
       service.nearbySearch(requestOptions, this.createMarkers)
     }
+  },
+
+  updateMap: function() {
+    var address1 = document.getElementById('address1').value
+    var address2 = document.getElementById('address2').value
+    this.findLatLong(address1)
+    this.findLatLong(address2)
   },
 
   createMarkers: function(results, status) {
