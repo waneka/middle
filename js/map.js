@@ -31,8 +31,8 @@ var GMap = {
 
   findTheMiddle: function(){
     return {
-      lat: (this.startingpoints[0].nb + this.startingpoints[1].nb)/2,
-      lng: (this.startingpoints[0].ob + this.startingpoints[1].ob)/2
+      lat: (this.startingpoints[0].d + this.startingpoints[1].d)/2,
+      lng: (this.startingpoints[0].e + this.startingpoints[1].e)/2
     }
   },
 
