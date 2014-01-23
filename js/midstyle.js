@@ -1,5 +1,5 @@
 var Midstyle = {
-	
+
 	init: function(){
 		this.updateGravatarImages()
 		this.updateAddresses()
@@ -23,9 +23,15 @@ var Midstyle = {
 	},
 
 	toggleActive: function(e){
-		e.target.classList.toggle('symbol-active')
-		var locationType = e.target.dataset.id
-		if (e.target.classList.contains('symbol-active')){
+		if (e.target.classList.contains('fa')) {
+			e.target.parentElement.classList.toggle('symbol-active')
+			var locationType = e.target.parentElement.dataset.id
+		} else {
+			e.target.classList.toggle('symbol-active')
+			var locationType = e.target.dataset.id
+		}
+		if (e.target.classList.contains('symbol-active') ||
+			e.target.parentElement.classList.contains('symbol-active')){
 			GMap.locationTypes.push(locationType)
 			GMap.populateTheMiddle(locationType)
 		} else {
