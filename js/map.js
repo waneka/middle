@@ -123,7 +123,7 @@ var GMap = {
     this.displayDirections(directionsTarget[2],directionsDisplay[2])
     this.displayDirections(directionsTarget.mobile[1],directionsDisplay.mobile[1])
     this.displayDirections(directionsTarget.mobile[2],directionsDisplay.mobile[2])
-    
+
     this.getDirections(place, directionsDisplay, 1)
     this.getDirections(place, directionsDisplay, 2)
     this.constructMailToLinks(place, directionsTarget, 1)
@@ -157,6 +157,6 @@ var GMap = {
     mailto += "%26daddr="+ place.vicinity.replace(/\s/g, '%2B') + "'>Email Directions<a>"
     directionsTarget[x].innerHTML = directionsTarget[x].innerHTML + mailto
     directionsTarget.mobile[x].innerHTML = directionsTarget.mobile[x].innerHTML + mailto
-  },
+  }
 
 }
