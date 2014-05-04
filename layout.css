@@ -4,6 +4,7 @@ h1, h2{
 	padding:0;
 }
 
+
 h1{
 	font-size: 2em;
 }
@@ -53,9 +54,17 @@ body{
 	margin:10px auto 20px auto;
 }
 
-#map-canvas{
+/*#map-canvas{
 	display:block;
 	height:80%;
+}*/
+
+#map{
+	display:block;
+	height:80%;
+	/*top:0;*/
+	/*bottom:0;*/
+	/*width:100%;*/
 }
 
 .update{
