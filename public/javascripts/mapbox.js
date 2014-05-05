@@ -20,7 +20,14 @@ var Map = {
     if (this.startingPoints.length === 2) {
       var middle = this.findTheMiddle()
       this.map.setView([middle.lat, middle.lng], 13);
-      // debugger
+      $.ajax({
+        type: 'POST',
+        url: '/places',
+        data: middle
+      }).success(function(response) {
+        debugger
+        console.log(response)
+      })
     }
   },
 
