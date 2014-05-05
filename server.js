@@ -1,47 +1,37 @@
-var http = require('http'), path = require('path'), fs = require('fs'), url = require('url')
 
-var server = http.createServer(handler)
+/**
+ * Module dependencies.
+ */
 
-server.listen(8080)
+var express = require('express');
+var routes = require('./routes');
+var http = require('http');
+var path = require('path');
+var engine = require('ejs-locals')
 
+var app = express();
 
-function handler(req, res) {
-  req.parsed_url = url.parse(req.url, true)
-  var filePath = '.' + req.parsed_url.pathname
-  if (filePath == './')
-    filePath = './index.html'
+// all environments
+app.engine('ejs', engine);
+app.set('port', process.env.PORT || 3000);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.use(express.favicon());
+app.use(express.logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(express.methodOverride());
+app.use(app.router);
+app.use(express.static(path.join(__dirname, 'public')));
 
-  var contentType = contentTypeChecker(filePath)
-
-  fs.exists(filePath, function(exists) {
-    if (exists) {
-      fs.readFile(filePath, function(error, content) {
-        if (error) {
-          res.writeHead(500)
-          res.end()
-        } else {
-          res.writeHead(200, {"Content-Type": contentType })
-          res.end(content, 'utf-8')
-        }
-      })
-    } else {
-      console.log('404 error. Filepath: ' + filePath)
-      res.writeHead(404)
-      res.end()
-    }
-  })
+// development only
+if ('development' == app.get('env')) {
+  app.use(express.errorHandler());
 }
 
-function contentTypeChecker(url) {
-  contentType = "text.html"
-  ext = path.extname(url)
-  switch(ext) {
-    case ".js":
-      contentType = "text/javascript";
-      break;
-    case ".css":
-      contentType = "text/css";
-      break;
-  }
-  return contentType
-}
+app.get('/', routes.index);
+app.get('/middle', routes.middle);
+
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});
