@@ -11,7 +11,6 @@ var Map = {
     var geocoder = L.mapbox.geocoder('waneka.i249l66n')
     geocoder.query(address, function(err, result) {
       self.startingPoints.push(result.latlng)
-      // debugger
       self.recenterMap()
     })
   },
@@ -25,7 +24,6 @@ var Map = {
         url: '/places',
         data: middle
       }).success(function(response) {
-        debugger
         console.log(response)
       })
     }
