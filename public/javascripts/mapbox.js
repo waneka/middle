@@ -1,5 +1,8 @@
 var Map = {
   startingPoints: [],
+  locationTypes: ['coffee'],
+  counter: 0,
+  pageLoad: 0,
 
   init: function() {
     this.map = L.mapbox.map('map', 'waneka.i249l66n').setView([37.7833, -122.4167], 13);
@@ -17,15 +20,27 @@ var Map = {
 
   recenterMap: function() {
     if (this.startingPoints.length === 2) {
-      var middle = this.findTheMiddle()
-      this.map.setView([middle.lat, middle.lng], 13);
-      $.ajax({
-        type: 'POST',
-        url: '/places',
-        data: middle
-      }).success(function(response) {
-        console.log(response)
-      })
+      this.middle = this.findTheMiddle()
+      this.map.setView([this.middle.lat, this.middle.lng], 13);
+      this.setStartingMarkers()
+      this.fetchVenueResults()
+      // this.populateTheMiddle()
+    }
+  },
+
+  setStartingMarkers: function() {
+    // debugger
+    this.startingPoints.forEach(function(point) {
+      L.marker(point, {title: 'Human Location'}).addTo(Map.map)
+    })
+  },
+
+  callback: function() {
+    Map.counter++
+    // debugger
+    if (Map.counter >= 3) {
+      Map.counter = 0
+      Map.populateTheMiddle()
     }
   },
 
