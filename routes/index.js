@@ -1,6 +1,7 @@
 var https = require('https'),
   querystring = require('querystring'),
-  async = require('async')
+  async = require('async'),
+  request = require('request')
 /*
  * GET home page.
  */
@@ -14,39 +15,32 @@ exports.middle = function(req, res) {
 }
 
 exports.places = function(req, res) {
-  var location = req.body
+  console.log('YO ****************************')
+  var middle = req.body.middle
+  var locationType = req.body.type
+  console.log(locationType)
   var results = {}
-  // var url = 'https://api.foursquare.com/v2/venues/explore?'
 
   var params = {
     client_id: 'UM333IWRCXGTOU4T42YEVFOZDGWSMDR22APR5WNEAMLFZGNW',
     client_secret: '3BLHRKC5IXY3KASZY5BQHTSSIM1RJUDACPWRCHZQ2YSWKIGU',
     v: '20130815',
-    ll: location.lat + ',' + location.lng,
-    section: 'coffee',
-    radius: '200',
+    ll: middle.lat + ',' + middle.lng,
+    section: locationType,
+    radius: '500',
     limit: 10
   }
 
   var options = {
-    hostname: 'api.foursquare.com',
-    path: '/v2/venues/explore?' + querystring.stringify(params)
+    url: 'https://api.foursquare.com/v2/venues/explore?',
+    qs: params
   }
 
-  async.waterfall([
-    function(callback) {
-      var req = https.request(options, function(response) {
-        console.log('StatusCode: ' + response.StatusCode)
-        response.on('data', function(d) {
-          results = JSON.stringify(d)
-          callback(null, results)
-        })
-      })
-      req.end()
+  request(options, function(err, response, body) {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(body)
     }
-  ], function(err, result) {
-    console.log(result)
-    res.send(results)
   })
-
 }
