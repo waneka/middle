@@ -4,7 +4,7 @@ var Midstyle = {
 		this.updateGravatarImages()
 		this.setAddresses()
 		this.makeSymbolsClickable()
-		this.updateAddress()
+		// this.updateAddress()
 	},
 
 	makeSymbolsClickable: function(){
@@ -14,16 +14,16 @@ var Midstyle = {
 		}
 	},
 
-	updateAddress: function() {
-		var updateButtons = document.getElementsByClassName('update-button')
-		for (var i=0; i < updateButtons.length; i++) {
-			updateButtons[i].addEventListener('click', this.updateTheMap)
-		}
-	},
+	// updateAddress: function() {
+	// 	var updateButtons = document.getElementsByClassName('update-button')
+	// 	for (var i=0; i < updateButtons.length; i++) {
+	// 		updateButtons[i].addEventListener('click', this.updateTheMap)
+	// 	}
+	// },
 
-	updateTheMap: function() {
-		GMap.updateMap()
-	},
+	// updateTheMap: function() {
+	// 	GMap.updateMap()
+	// },
 
 	toggleActive: function(e){
 		if (e.target.classList.contains('fa')) {
@@ -59,9 +59,9 @@ var Midstyle = {
 
 	setAddresses: function(){
 		document.getElementById('address1').value = App.user.address[1]
-		document.getElementById('address1-mobile').value = App.user.address[1]
+		// document.getElementById('address1-mobile').value = App.user.address[1]
 		document.getElementById('address2').value = App.user.address[2]
-		document.getElementById('address2-mobile').value = App.user.address[2]
+		// document.getElementById('address2-mobile').value = App.user.address[2]
 	},
 
 	hash: function(email){
