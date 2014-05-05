@@ -35,12 +35,12 @@ var Midstyle = {
 		}
 		if (e.target.classList.contains('symbol-active') ||
 			e.target.parentElement.classList.contains('symbol-active')){
-			GMap.locationTypes.push(locationType)
-			GMap.populateTheMiddle(locationType)
+			Map.locationTypes.push(locationType)
+			Map.populateTheMiddle(locationType)
 		} else {
-			var i = GMap.locationTypes.indexOf(locationType)
-			GMap.locationTypes.splice(i,1)
-			GMap.populateTheMiddle(locationType)
+			var i = Map.locationTypes.indexOf(locationType)
+			Map.locationTypes.splice(i,1)
+			Map.populateTheMiddle(locationType)
 		}
 	},
 
