@@ -3,8 +3,8 @@ var App = {
     this.setUserData()
     this.map = map
     this.map.init()
-    this.map.findLocation(this.user.address[1])
-    this.map.findLocation(this.user.address[2])
+    this.map.findLocation(this.user.address[1], this.user.email[1])
+    this.map.findLocation(this.user.address[2], this.user.email[2])
   },
 
   setUserData: function(){

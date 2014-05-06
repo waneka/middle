@@ -8,12 +8,17 @@ var Map = {
     this.map = L.mapbox.map('map', 'waneka.i249l66n').setView([37.7833, -122.4167], 13);
   },
 
-  findLocation: function(address) {
+  findLocation: function(address, email) {
+
     var self = this
     self.startingPoints = []
     var geocoder = L.mapbox.geocoder('waneka.i249l66n')
     geocoder.query(address, function(err, result) {
-      self.startingPoints.push(result.latlng)
+      var location = {
+        location: result.latlng,
+        email: email
+      }
+      self.startingPoints.push(location)
       self.recenterMap()
     })
   },
@@ -31,7 +36,20 @@ var Map = {
   setStartingMarkers: function() {
     // debugger
     this.startingPoints.forEach(function(point) {
-      L.marker(point, {title: 'Human Location'}).addTo(Map.map)
+      var geoJSON = {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [point.location[1],point.location[0]]
+          },
+          "properties": {
+            "title": point.email,
+            "marker-color": "#fc4353",
+            "marker-size": "large",
+            "marker-symbol": "star-stroked"
+          }
+        }
+      var humanLayer = L.mapbox.featureLayer(geoJSON).addTo(Map.map)
     })
   },
 
@@ -122,8 +140,8 @@ var Map = {
 
   findTheMiddle: function() {
     return {
-      lat: (this.startingPoints[0][0] + this.startingPoints[1][0])/2,
-      lng: (this.startingPoints[0][1] + this.startingPoints[1][1])/2
+      lat: (this.startingPoints[0].location[0] + this.startingPoints[1].location[0])/2,
+      lng: (this.startingPoints[0].location[1] + this.startingPoints[1].location[1])/2
     }
   }
 }
