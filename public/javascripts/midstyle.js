@@ -4,7 +4,7 @@ var Midstyle = {
 		this.updateGravatarImages()
 		this.setAddresses()
 		this.makeSymbolsClickable()
-		// this.updateAddress()
+		this.updateAddress()
 	},
 
 	makeSymbolsClickable: function(){
@@ -14,16 +14,16 @@ var Midstyle = {
 		}
 	},
 
-	// updateAddress: function() {
-	// 	var updateButtons = document.getElementsByClassName('update-button')
-	// 	for (var i=0; i < updateButtons.length; i++) {
-	// 		updateButtons[i].addEventListener('click', this.updateTheMap)
-	// 	}
-	// },
+	updateAddress: function() {
+		var updateButtons = document.getElementsByClassName('update-button')
+		for (var i=0; i < updateButtons.length; i++) {
+			updateButtons[i].addEventListener('click', this.updateTheMap)
+		}
+	},
 
-	// updateTheMap: function() {
-	// 	GMap.updateMap()
-	// },
+	updateTheMap: function() {
+		Map.updateMap()
+	},
 
 	toggleActive: function(e){
 		if (e.target.classList.contains('fa')) {
@@ -35,12 +35,12 @@ var Midstyle = {
 		}
 		if (e.target.classList.contains('symbol-active') ||
 			e.target.parentElement.classList.contains('symbol-active')){
-			GMap.locationTypes.push(locationType)
-			GMap.populateTheMiddle(locationType)
+			Map.locationTypes.push(locationType)
+			Map.populateTheMiddle()
 		} else {
-			var i = GMap.locationTypes.indexOf(locationType)
-			GMap.locationTypes.splice(i,1)
-			GMap.populateTheMiddle(locationType)
+			var i = Map.locationTypes.indexOf(locationType)
+			Map.locationTypes.splice(i,1)
+			Map.populateTheMiddle()
 		}
 	},
 

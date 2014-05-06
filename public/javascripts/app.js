@@ -3,8 +3,8 @@ var App = {
     this.setUserData()
     this.map = map
     this.map.init()
-    this.map.findLocation(this.user.address[1])
-    this.map.findLocation(this.user.address[2])
+    this.map.findLocation(this.user.address[1], this.user.email[1])
+    this.map.findLocation(this.user.address[2], this.user.email[2])
   },
 
   setUserData: function(){
@@ -30,22 +30,3 @@ window.onload = function() {
   App.init(Map)
   Midstyle.init()
 }
-
-// var App = {
-
-//   init: function(gmap){
-//     this.setUserData()
-//     this.gmap = gmap
-//     this.gmap.initialize()
-//     this.gmap.findLatLong(this.user.address[1])
-//     this.gmap.findLatLong(this.user.address[2])
-//   },
-
-// ,
-
-// }
-
-// window.onload = function(){
-//   App.init(GMap)
-  // Midstyle.init()
-// }
