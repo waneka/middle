@@ -30,22 +30,3 @@ window.onload = function() {
   App.init(Map)
   Midstyle.init()
 }
-
-// var App = {
-
-//   init: function(gmap){
-//     this.setUserData()
-//     this.gmap = gmap
-//     this.gmap.initialize()
-//     this.gmap.findLatLong(this.user.address[1])
-//     this.gmap.findLatLong(this.user.address[2])
-//   },
-
-// ,
-
-// }
-
-// window.onload = function(){
-//   App.init(GMap)
-  // Midstyle.init()
-// }

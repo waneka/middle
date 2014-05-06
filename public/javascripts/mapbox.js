@@ -2,7 +2,7 @@ var Map = {
   startingPoints: [],
   locationTypes: ['coffee'],
   counter: 0,
-  pageLoad: 0,
+  initPop: false,
 
   init: function() {
     this.map = L.mapbox.map('map', 'waneka.i5nnfp13').setView([37.7833, -122.4167], 13);
@@ -12,7 +12,6 @@ var Map = {
   ,
 
   findLocation: function(address, email) {
-
     var self = this
     self.startingPoints = []
     var geocoder = L.mapbox.geocoder('waneka.i5nnfp13')
@@ -29,15 +28,14 @@ var Map = {
   recenterMap: function() {
     if (this.startingPoints.length === 2) {
       this.middle = this.findTheMiddle()
-      this.map.setView([this.middle.lat, this.middle.lng], 13);
       this.setStartingMarkers()
       this.fetchVenueResults()
-      // this.populateTheMiddle()
+      this.populateTheMiddle()
     }
   },
 
   setStartingMarkers: function() {
-    // debugger
+    var humanLocations = []
     this.startingPoints.forEach(function(point) {
       var geoJSON = {
           "type": "Feature",
@@ -60,7 +58,6 @@ var Map = {
 
   callback: function() {
     Map.counter++
-    // debugger
     if (Map.counter >= 3) {
       Map.counter = 0
       Map.populateTheMiddle()
@@ -70,7 +67,7 @@ var Map = {
   fetchVenueResults: function() {
     this.fetchCoffeeVenues(this.callback)
     this.fetchFoodVenues(this.callback)
-    this.drink = this.fetchDrinkVenues(this.callback)
+    this.fetchDrinkVenues(this.callback)
   },
 
   populateTheMiddle: function() {
@@ -133,7 +130,6 @@ var Map = {
         type: 'coffee'
       }
     }).success(function(response) {
-      // debugger
       Map.coffee = response.response.groups[0].items
       if (Map.initPop === false) {
         Map.initPop = true
@@ -154,7 +150,6 @@ var Map = {
         type: 'food'
       }
     }).success(function(response) {
-      // debugger
       Map.food = response.response.groups[0].items
       callback()
     })
@@ -170,16 +165,25 @@ var Map = {
         type: 'drinks'
       }
     }).success(function(response) {
-      // debugger
       Map.drink = response.response.groups[0].items
       callback()
     })
   },
 
+  updateMap: function() {
+    this.startingPoints = []
+    var address1 = document.getElementById('address1').value
+    var address2 = document.getElementById('address2').value
+    this.findLocation(address1, App.user.email[1])
+    this.findLocation(address2, App.user.email[2])
+  },
+
   findTheMiddle: function() {
+    // var pythagorean = Math.pow((this.startingPoints[0].location[0] - this.startingPoints[1].location[0]),2) + Math.pow((this.startingPoints[0].location[1] - this.startingPoints[1].location[1]),2)
     return {
       lat: (this.startingPoints[0].location[0] + this.startingPoints[1].location[0])/2,
       lng: (this.startingPoints[0].location[1] + this.startingPoints[1].location[1])/2
+      // zoom: (Math.sqrt(pythagorean)/0.0040604835604766834)
     }
   }
 }
