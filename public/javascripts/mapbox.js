@@ -5,14 +5,17 @@ var Map = {
   pageLoad: 0,
 
   init: function() {
-    this.map = L.mapbox.map('map', 'waneka.i249l66n').setView([37.7833, -122.4167], 13);
-  },
+    this.map = L.mapbox.map('map', 'waneka.i5nnfp13').setView([37.7833, -122.4167], 13);
+    this.featureLayer = L.mapbox.featureLayer().addTo(this.map)
+    this.humanLayer = L.mapbox.featureLayer().addTo(this.map)
+  }
+  ,
 
   findLocation: function(address, email) {
 
     var self = this
     self.startingPoints = []
-    var geocoder = L.mapbox.geocoder('waneka.i249l66n')
+    var geocoder = L.mapbox.geocoder('waneka.i5nnfp13')
     geocoder.query(address, function(err, result) {
       var location = {
         location: result.latlng,
@@ -49,8 +52,10 @@ var Map = {
             "marker-symbol": "star-stroked"
           }
         }
-      var humanLayer = L.mapbox.featureLayer(geoJSON).addTo(Map.map)
+      humanLocations.push(geoJSON)
     })
+    this.humanLayer.setGeoJSON(humanLocations)
+    this.map.fitBounds(this.humanLayer.getBounds());
   },
 
   callback: function() {
@@ -72,18 +77,50 @@ var Map = {
     // check the dom for which location types are selected
     // populate the map based on these types
     // this function can be called when the buttons are clicked, as well as when the results have finished returning.
-    debugger
+    if (this.initPop === true) {
+      var geoLocations = []
+      this.locationTypes.forEach(function(type) {
+        geoLocations.push(Map.addMarkers(type))
+      })
+      var merged = []
+      merged = merged.concat.apply(merged, geoLocations)
+      Map.featureLayer.setGeoJSON(merged)
+    }
   },
 
-  initialPopulation: function() {
-    this.coffee.forEach(function(place){
-      L.marker([place.venue.location.lat,place.venue.location.lng], {
-        title: place.venue.name,
-        riseOnHover: true
-      })
-      .addTo(Map.map)
+  addMarkers: function(type) {
+    var symbol, color, venues
+    if (type === "coffee") {
+      symbol = "cafe"
+      color = "#3fbfbf"
+      venues = this.coffee
+    } else if (type === 'food') {
+      symbol = "restaurant"
+      color = "#2d7ac7"
+      venues = this.food
+    } else if (type === 'drinks') {
+      symbol = "bar"
+      color = "#2dc787"
+      venues = this.drink
+    }
+    var geoLocations = []
+    venues.forEach(function(place) {
+      var geoJSON = {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [place.venue.location.lng,place.venue.location.lat]
+        },
+        "properties": {
+          "title": place.venue.name,
+          "marker-color": color,
+          "marker-size": "large",
+          "marker-symbol": symbol
+        }
+      }
+      geoLocations.push(geoJSON)
     })
-    debugger
+    return geoLocations
   },
 
   fetchCoffeeVenues: function(callback) {
@@ -98,11 +135,12 @@ var Map = {
     }).success(function(response) {
       // debugger
       Map.coffee = response.response.groups[0].items
-      callback()
-      if (Map.pageLoad <= 1) {
-        Map.pageLoad = 0
-        Map.initialPopulation()
+      if (Map.initPop === false) {
+        Map.initPop = true
+        var geoLocations = Map.addMarkers('coffee')
+        Map.featureLayer.setGeoJSON(geoLocations)
       }
+      callback()
     })
   },
 
