@@ -7,6 +7,7 @@ var App = {
       if (app.map.updateFlag === false) {
         app.map.findLocation(app.user.address[1], app.user.email[1])
         app.map.findLocation(app.user.address[2], app.user.email[2])
+        app.map.updateFlag = true
       }
     })
   },
