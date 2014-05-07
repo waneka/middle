@@ -2,14 +2,16 @@ var Map = {
   startingPoints: [],
   locationTypes: ['coffee'],
   counter: 0,
-  initPop: false,
+  initLoad: false,
+  updateFlag: false,
 
-  init: function() {
-    this.map = L.mapbox.map('map', 'waneka.i5nnfp13').setView([37.7833, -122.4167], 13);
+  init: function(callback) {
+    this.map = L.mapbox.map('map', 'waneka.i5nnfp13').on('viewreset', function() {
+      callback()
+    })
     this.featureLayer = L.mapbox.featureLayer().addTo(this.map)
     this.humanLayer = L.mapbox.featureLayer().addTo(this.map)
-  }
-  ,
+  },
 
   findLocation: function(address, email) {
     var self = this
@@ -31,7 +33,12 @@ var Map = {
       this.setStartingMarkers()
       this.fetchVenueResults()
       this.populateTheMiddle()
+      this.fitBounds()
     }
+  },
+
+  fitBounds: function() {
+    this.map.fitBounds(this.humanLayer.getBounds())
   },
 
   setStartingMarkers: function() {
@@ -53,7 +60,6 @@ var Map = {
       humanLocations.push(geoJSON)
     })
     this.humanLayer.setGeoJSON(humanLocations)
-    this.map.fitBounds(this.humanLayer.getBounds());
   },
 
   callback: function() {
@@ -74,7 +80,7 @@ var Map = {
     // check the dom for which location types are selected
     // populate the map based on these types
     // this function can be called when the buttons are clicked, as well as when the results have finished returning.
-    if (this.initPop === true) {
+    if (this.initLoad === true) {
       var geoLocations = []
       this.locationTypes.forEach(function(type) {
         geoLocations.push(Map.addMarkers(type))
@@ -140,8 +146,8 @@ var Map = {
       }
     }).success(function(response) {
       Map.coffee = response.response.groups[0].items
-      if (Map.initPop === false) {
-        Map.initPop = true
+      if (Map.initLoad === false) {
+        Map.initLoad = true
         var geoLocations = Map.addMarkers('coffee')
         Map.featureLayer.setGeoJSON(geoLocations)
       }
@@ -180,6 +186,7 @@ var Map = {
   },
 
   updateMap: function() {
+    this.updateFlag = true
     this.startingPoints = []
     var address1 = document.getElementById('address1').value
     var address2 = document.getElementById('address2').value

@@ -1,10 +1,14 @@
 var App = {
   init: function(map) {
+    var app = this
     this.setUserData()
     this.map = map
-    this.map.init()
-    this.map.findLocation(this.user.address[1], this.user.email[1])
-    this.map.findLocation(this.user.address[2], this.user.email[2])
+    this.map.init(function() {
+      if (app.map.updateFlag === false) {
+        app.map.findLocation(app.user.address[1], app.user.email[1])
+        app.map.findLocation(app.user.address[2], app.user.email[2])
+      }
+    })
   },
 
   setUserData: function(){
