@@ -15,10 +15,8 @@ exports.middle = function(req, res) {
 }
 
 exports.places = function(req, res) {
-  console.log('YO ****************************')
   var middle = req.body.middle
   var locationType = req.body.type
-  console.log(locationType)
   var results = {}
 
   var params = {
