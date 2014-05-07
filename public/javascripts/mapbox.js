@@ -110,6 +110,7 @@ var Map = {
         },
         "properties": {
           "title": place.venue.name,
+          "description": Map.urlChecker(place),
           "marker-color": color,
           "marker-size": "large",
           "marker-symbol": symbol
@@ -118,6 +119,14 @@ var Map = {
       geoLocations.push(geoJSON)
     })
     return geoLocations
+  },
+
+  urlChecker: function(place) {
+    if (place.venue.url !== undefined) {
+      return (place.venue.location.address + "<br>" + "<a href='" + place.venue.url + "'>" + "Website" + "</a>")
+    } else {
+      return (place.venue.location.address)
+    }
   },
 
   fetchCoffeeVenues: function(callback) {
