@@ -28,7 +28,7 @@ exports.places = function(req, res) {
     ll: middle.lat + ',' + middle.lng,
     section: locationType,
     radius: '500',
-    limit: 5
+    limit: 10
   }
 
   var options = {
