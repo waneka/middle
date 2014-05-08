@@ -48,16 +48,13 @@ var View = {
 	},
 
 	updateGravatarImages: function(){
-		var leftGravatars = document.getElementsByClassName('gravatar-left')
-		var rightGravatars = document.getElementsByClassName('gravatar-right')
-		for (var i=0; i<leftGravatars.length; i++){
-			oldSrc = leftGravatars[i].src
-			leftGravatars[i].src = oldSrc.replace('00000000000000000000000000000000',this.hash(App.user.email[1]))
-		}
-		for (var i=0; i<rightGravatars.length; i++){
-			oldSrc = rightGravatars[i].src
-			rightGravatars[i].src = oldSrc.replace('00000000000000000000000000000000',this.hash(App.user.email[2]))
-		}
+		var leftGravatar = document.getElementById('gravatar-left')
+		var rightGravatar = document.getElementById('gravatar-right')
+
+		var oldLefty = leftGravatar.src
+		leftGravatar.src = oldLefty.replace('00000000000000000000000000000000', this.hash(App.user.email[1]))
+		var oldRighty = rightGravatar.src
+		rightGravatar.src = oldRighty.replace('00000000000000000000000000000000', this.hash(App.user.email[2]))
 	},
 
 	setAddresses: function(){
