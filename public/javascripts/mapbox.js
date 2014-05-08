@@ -79,9 +79,6 @@ var Map = {
   },
 
   populateTheMiddle: function() {
-    // check the dom for which location types are selected
-    // populate the map based on these types
-    // this function can be called when the buttons are clicked, as well as when the results have finished returning.
     if (this.initLoad === true) {
       var geoLocations = []
       this.locationTypes.forEach(function(type) {
