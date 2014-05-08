@@ -33,5 +33,5 @@ var App = {
 
 window.onload = function() {
   App.init(Map)
-  Midstyle.init()
+  View.init()
 }

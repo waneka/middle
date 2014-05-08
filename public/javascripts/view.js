@@ -1,4 +1,4 @@
-var Midstyle = {
+var View = {
 
 	init: function(){
 		this.updateGravatarImages()
@@ -17,17 +17,13 @@ var Midstyle = {
 	updateAddress: function() {
 		var updateButtons = document.getElementsByClassName('update-button')
 		for (var i=0; i < updateButtons.length; i++) {
-			updateButtons[i].addEventListener('click', this.updateTheMap)
+			updateButtons[i].addEventListener('click', Map.updateMap)
 		}
 	},
 
 	setInitialVenue: function(type) {
 		var button = document.getElementById(type)
 		button.classList.add('symbol-active')
-	},
-
-	updateTheMap: function() {
-		Map.updateMap()
 	},
 
 	toggleActive: function(e){
@@ -64,9 +60,7 @@ var Midstyle = {
 
 	setAddresses: function(){
 		document.getElementById('address1').value = App.user.address[1]
-		// document.getElementById('address1-mobile').value = App.user.address[1]
 		document.getElementById('address2').value = App.user.address[2]
-		// document.getElementById('address2-mobile').value = App.user.address[2]
 	},
 
 	hash: function(email){
