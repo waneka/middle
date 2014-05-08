@@ -9,7 +9,7 @@ var Map = {
     this.map = L.mapbox.map('map', 'waneka.i5nnfp13').on('viewreset', function() {
       callback()
     })
-    this.featureLayer = L.mapbox.featureLayer().addTo(this.map)
+    this.venueLayer = L.mapbox.featureLayer().addTo(this.map)
     this.humanLayer = L.mapbox.featureLayer().addTo(this.map)
     this.userOneDirectionsLayer = L.mapbox.featureLayer().addTo(this.map)
     this.userTwoDirectionsLayer = L.mapbox.featureLayer().addTo(this.map)
@@ -184,7 +184,7 @@ var Map = {
         Map.initLoad = true
         Map.locationTypes.push(type)
         var geoLocations = Map.addMarkers(type)
-        Map.featureLayer.setGeoJSON(geoLocations)
+        Map.venueLayer.setGeoJSON(geoLocations)
         View.setInitialVenue(type)
       }
       callback()
