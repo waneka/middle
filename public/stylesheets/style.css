@@ -162,8 +162,8 @@ button.symbol-active{
   background-color:#2980BB;
 }
 
-/*@media only screen and (min-device-width : 569px) and (max-device-width : 1024px){*/
-@media (min-width: 569px) and (max-width:1024px){
+@media only screen and (min-device-width : 569px) and (max-device-width : 1024px){
+/*@media (min-width: 569px) and (max-width:1024px){*/
   .form-left, .form-middle, .form-right{
     width:100%;
     float:none;
@@ -171,8 +171,8 @@ button.symbol-active{
   }
 }
 
-/*@media only screen and (min-device-width : 320px) and (max-device-width : 568px){*/
-@media (min-width: 320px) and (max-width: 568px){
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px){
+/*@media (min-width: 320px) and (max-width: 568px){*/
   .form-left, .form-middle, .form-right{
     width:100%;
     float:none;
