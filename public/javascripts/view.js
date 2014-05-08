@@ -17,7 +17,9 @@ var View = {
 	updateAddress: function() {
 		var updateButtons = document.getElementsByClassName('update-button')
 		for (var i=0; i < updateButtons.length; i++) {
-			updateButtons[i].addEventListener('click', Map.updateMap)
+			updateButtons[i].addEventListener('click', function() {
+				Map.updateMap()
+			})
 		}
 	},
 
