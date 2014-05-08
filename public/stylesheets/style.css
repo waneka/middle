@@ -1,17 +1,8 @@
-h1, h2{
+h1{
   text-align: center;
   margin:0;
   padding:0;
-}
-
-
-h1{
   font-size: 2em;
-}
-
-h2{
-  font-size: 1.5em;
-  font-weight:lighter;
 }
 
 .red{
@@ -22,31 +13,19 @@ h2{
   color:#999999;
 }
 
-.meet-me{
-  width:;
-  margin: 0 auto;
-}
-
 body{
   margin:0;
-  padding:0;
   font-family: 'Raleway', sans-serif;
 }
 
 .the-whole-page{
-  position:absolute;
   width:100%;
   height:500px;
-  margin:0 auto;
   margin-top: 20px;
 
 }
 
 .button-holder-wide{
-  position:relative;
-  display:block;
-  width:100%;
-  margin:0;
   text-align: center;
 }
 
@@ -54,25 +33,12 @@ body{
   margin:10px auto 20px auto;
 }
 
-/*#map-canvas{
-  display:block;
-  height:80%;
-}*/
-
 #map{
   display:block;
-  height:80%;
-  /*top:0;*/
-  /*bottom:0;*/
-  /*width:100%;*/
-}
-
-.update{
-  width:100%;
+  height:90%;
 }
 
 .gravatar{
-  width:100px;
   height:100px;
   display:block;
   margin: 0 auto;
@@ -80,11 +46,10 @@ body{
 
 .left, .middle, .right{
   height:100%;
-  width:20%;
 }
 
 .left{
-  display: block;
+  width:20%;
   float: left;
 }
 
@@ -94,37 +59,27 @@ body{
 }
 
 .middle{
-  display: block;
   width: 60%;
   float: left;
 }
 
 .right{
   float: left;
-  margin: auto auto auto 0;
-}
-
-.hidden, .mobile-left, .mobile-right{
-  display:none;
+  width:20%;
 }
 
 .form-left {
-  display: block;
-  float: left;
   width: 35%;
   text-align: center;
 }
 
 .form-right {
-  float: left;
-  margin: auto auto auto 0;
   text-align: center;
   width: 35%;
 }
 
 .form-middle {
   width: 30%;
-  text-align: center;
 }
 
 form {
@@ -141,9 +96,6 @@ input[type='submit'] {
   background-color:#7f8c8d;
   -webkit-box-shadow:none;
   -moz-box-shadow:none;
-  box-shadow:none;
-  margin: 0 auto;
-  padding: 5px 8px;
   color:white;
   font-family: 'Raleway', sans-serif;
   width: 150px;
@@ -157,13 +109,12 @@ textarea{
   display:block;
   margin: 5px auto 5px auto;
   resize:none;
-  border: solid 1px;
   text-align:center;
   font-family: 'Raleway', sans-serif;
   font-size:1em;
 }
 
-.directions1, .directions2, .directions1m, .directions2m {
+.directions1, .directions2 {
   margin: 10px;
 }
 
@@ -173,7 +124,6 @@ button{
   -webkit-box-shadow:none;
   -moz-box-shadow:none;
   box-shadow:none;
-  margin: 0 auto;
   padding: 5px 8px;
   color:white;
   font-family: 'Raleway', sans-serif;
@@ -186,6 +136,12 @@ button:focus{
 button.update-button{
   display:block;
   margin: 0 auto;
+}
+
+button.update-button:hover{
+  background-color: #af0000;
+  border: 1px #580000 solid;
+  transition: 1s;
 }
 
 button.symbol{
@@ -206,13 +162,8 @@ button.symbol-active{
   background-color:#2980BB;
 }
 
-@media (max-width:600px){
-  h1{
-    font-size:1.5em;
-  }
-  h2{
-    font-size:1em;
-  }
+/*@media only screen and (min-device-width : 569px) and (max-device-width : 1024px){*/
+@media (min-width: 569px) and (max-width:1024px){
   .form-left, .form-middle, .form-right{
     width:100%;
     float:none;
@@ -220,16 +171,16 @@ button.symbol-active{
   }
 }
 
-@media (max-width:500px){
-  #map-canvas{
-    height:70%;
+/*@media only screen and (min-device-width : 320px) and (max-device-width : 568px){*/
+@media (min-width: 320px) and (max-width: 568px){
+  .form-left, .form-middle, .form-right{
+    width:100%;
+    float:none;
+    margin: 20px 0;
   }
 
   .middle{
-    display:block;
     width:100%;
-    margin:0;
-    padding:0;
   }
 
   .left, .right{
@@ -240,36 +191,30 @@ button.symbol-active{
     display:block;
   }
 
-  .mobile-left, .mobile-right{
-    display:block;
-    width:100%;
-    margin: 0 auto;
-  }
-
-  .gravatar{
+/*  .gravatar{
     width:100px;
     height:100px;
     display:inline-block;
     vertical-align: top;
-  }
+  }*/
 
-  textarea{
+/*  textarea{
     display:inline-block;
     vertical-align: top;
     text-align: left;
     width:50%;
     height:80px;
-  }
+  }*/
 
-  .update{
+/*  .update{
     float:right;
     vertical-align:top;
     width:10%;
-  }
+  }*/
 
-  button.update-button{
+/*  button.update-button{
     vertical-align:top;
     display:inline-block;
     height:80px;
-  }
+  }*/
 }
