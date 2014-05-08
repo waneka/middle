@@ -1,6 +1,6 @@
 var Map = {
   startingPoints: [],
-  locationTypes: ['coffee'],
+  locationTypes: [],
   counter: 0,
   initLoad: false,
   updateFlag: false,
@@ -71,9 +71,9 @@ var Map = {
   },
 
   fetchVenueResults: function() {
-    this.fetchCoffeeVenues(this.callback)
-    this.fetchFoodVenues(this.callback)
-    this.fetchDrinkVenues(this.callback)
+    this.fetchVenues('coffee', this.callback)
+    this.fetchVenues('food', this.callback)
+    this.fetchVenues('drinks', this.callback)
   },
 
   populateTheMiddle: function() {
@@ -97,14 +97,14 @@ var Map = {
       symbol = "cafe"
       color = "#3fbfbf"
       venues = this.coffee
-    } else if (type === 'food') {
+    } else if (type === "food") {
       symbol = "restaurant"
       color = "#2d7ac7"
       venues = this.food
-    } else if (type === 'drinks') {
+    } else if (type === "drinks") {
       symbol = "bar"
       color = "#2dc787"
-      venues = this.drink
+      venues = this.drinks
     }
     var geoLocations = []
     venues.forEach(function(place) {
@@ -135,52 +135,24 @@ var Map = {
     }
   },
 
-  fetchCoffeeVenues: function(callback) {
+  fetchVenues: function(type, callback) {
     $.ajax({
       url: '/places',
       type: 'POST',
       dataType: 'json',
       data: {
         middle: this.middle,
-        type: 'coffee'
+        type: type
       }
     }).success(function(response) {
-      Map.coffee = response.response.groups[0].items
+      Map[type] = response.response.groups[0].items
       if (Map.initLoad === false) {
         Map.initLoad = true
-        var geoLocations = Map.addMarkers('coffee')
+        Map.locationTypes.push(type)
+        var geoLocations = Map.addMarkers(type)
         Map.featureLayer.setGeoJSON(geoLocations)
+        Midstyle.setInitialVenue(type)
       }
-      callback()
-    })
-  },
-
-  fetchFoodVenues: function(callback) {
-    $.ajax({
-      url: '/places',
-      type: 'POST',
-      dataType: 'json',
-      data: {
-        middle: this.middle,
-        type: 'food'
-      }
-    }).success(function(response) {
-      Map.food = response.response.groups[0].items
-      callback()
-    })
-  },
-
-  fetchDrinkVenues: function(callback) {
-    $.ajax({
-      url: '/places',
-      type: 'POST',
-      dataType: 'json',
-      data: {
-        middle: this.middle,
-        type: 'drinks'
-      }
-    }).success(function(response) {
-      Map.drink = response.response.groups[0].items
       callback()
     })
   },
@@ -194,11 +166,11 @@ var Map = {
   },
 
   findTheMiddle: function() {
-    // var pythagorean = Math.pow((this.startingPoints[0].location[0] - this.startingPoints[1].location[0]),2) + Math.pow((this.startingPoints[0].location[1] - this.startingPoints[1].location[1]),2)
+    var pythagorean = Math.pow((this.startingPoints[0].location[0] - this.startingPoints[1].location[0]),2) + Math.pow((this.startingPoints[0].location[1] - this.startingPoints[1].location[1]),2)
     return {
       lat: (this.startingPoints[0].location[0] + this.startingPoints[1].location[0])/2,
-      lng: (this.startingPoints[0].location[1] + this.startingPoints[1].location[1])/2
-      // zoom: (Math.sqrt(pythagorean)/0.0040604835604766834)
+      lng: (this.startingPoints[0].location[1] + this.startingPoints[1].location[1])/2,
+      radius: (Math.sqrt(pythagorean) * 10000)
     }
   }
 }
