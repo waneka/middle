@@ -11,6 +11,8 @@ var Map = {
     })
     this.featureLayer = L.mapbox.featureLayer().addTo(this.map)
     this.humanLayer = L.mapbox.featureLayer().addTo(this.map)
+    this.userOneDirectionsLayer = L.mapbox.featureLayer().addTo(this.map)
+    this.userTwoDirectionsLayer = L.mapbox.featureLayer().addTo(this.map)
   },
 
   findLocation: function(address, email) {
@@ -87,8 +89,40 @@ var Map = {
       })
       var merged = []
       merged = merged.concat.apply(merged, geoLocations)
-      Map.featureLayer.setGeoJSON(merged)
+      this.venueLayer.setGeoJSON(merged)
+      this.bindDirectionsEvent(this.userOneDirectionsLayer, this.startingPoints[0], Map.venueLayer)
+      this.bindDirectionsEvent(this.userTwoDirectionsLayer, this.startingPoints[1], Map.venueLayer)
     }
+  },
+
+  bindDirectionsEvent: function(dirLayer, human, layer) {
+    layer.on('click', function(e) {
+      $.ajax({
+        type: 'POST',
+        url: '/directions',
+        data: {
+          pointOne: human.location,
+          pointTwo: e.layer.feature.geometry.coordinates
+        },
+        dataType: 'json'
+      }).success(function(data) {
+        var geoArray = data.routes[0].geometry.coordinates
+        Map.drawRoute(geoArray, dirLayer)
+
+      })
+    })
+  },
+
+  drawRoute: function(geoArray, dirLayer) {
+    var arryLength = geoArray.length
+    var geoJSON = {
+      "type": "LineString",
+      "coordinates": []
+    }
+    for (var i=0;i<arryLength;i++) {
+      geoJSON.coordinates[i] = geoArray[i]
+    }
+    dirLayer.setGeoJSON(geoJSON)
   },
 
   addMarkers: function(type) {
