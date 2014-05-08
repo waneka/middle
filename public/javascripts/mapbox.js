@@ -151,7 +151,7 @@ var Map = {
         Map.locationTypes.push(type)
         var geoLocations = Map.addMarkers(type)
         Map.featureLayer.setGeoJSON(geoLocations)
-        Midstyle.setInitialVenue(type)
+        View.setInitialVenue(type)
       }
       callback()
     })

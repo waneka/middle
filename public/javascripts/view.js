@@ -1,4 +1,4 @@
-var Midstyle = {
+var View = {
 
 	init: function(){
 		this.updateGravatarImages()
@@ -17,17 +17,15 @@ var Midstyle = {
 	updateAddress: function() {
 		var updateButtons = document.getElementsByClassName('update-button')
 		for (var i=0; i < updateButtons.length; i++) {
-			updateButtons[i].addEventListener('click', this.updateTheMap)
+			updateButtons[i].addEventListener('click', function() {
+				Map.updateMap()
+			})
 		}
 	},
 
 	setInitialVenue: function(type) {
 		var button = document.getElementById(type)
 		button.classList.add('symbol-active')
-	},
-
-	updateTheMap: function() {
-		Map.updateMap()
 	},
 
 	toggleActive: function(e){
@@ -50,23 +48,18 @@ var Midstyle = {
 	},
 
 	updateGravatarImages: function(){
-		var leftGravatars = document.getElementsByClassName('gravatar-left')
-		var rightGravatars = document.getElementsByClassName('gravatar-right')
-		for (var i=0; i<leftGravatars.length; i++){
-			oldSrc = leftGravatars[i].src
-			leftGravatars[i].src = oldSrc.replace('00000000000000000000000000000000',this.hash(App.user.email[1]))
-		}
-		for (var i=0; i<rightGravatars.length; i++){
-			oldSrc = rightGravatars[i].src
-			rightGravatars[i].src = oldSrc.replace('00000000000000000000000000000000',this.hash(App.user.email[2]))
-		}
+		var leftGravatar = document.getElementById('gravatar-left')
+		var rightGravatar = document.getElementById('gravatar-right')
+
+		var oldLefty = leftGravatar.src
+		leftGravatar.src = oldLefty.replace('00000000000000000000000000000000', this.hash(App.user.email[1]))
+		var oldRighty = rightGravatar.src
+		rightGravatar.src = oldRighty.replace('00000000000000000000000000000000', this.hash(App.user.email[2]))
 	},
 
 	setAddresses: function(){
 		document.getElementById('address1').value = App.user.address[1]
-		// document.getElementById('address1-mobile').value = App.user.address[1]
 		document.getElementById('address2').value = App.user.address[2]
-		// document.getElementById('address2-mobile').value = App.user.address[2]
 	},
 
 	hash: function(email){
