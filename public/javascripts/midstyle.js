@@ -21,6 +21,11 @@ var Midstyle = {
 		}
 	},
 
+	setInitialVenue: function(type) {
+		var button = document.getElementById(type)
+		button.classList.add('symbol-active')
+	},
+
 	updateTheMap: function() {
 		Map.updateMap()
 	},

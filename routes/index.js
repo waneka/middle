@@ -25,7 +25,7 @@ exports.places = function(req, res) {
     v: '20130815',
     ll: middle.lat + ',' + middle.lng,
     section: locationType,
-    radius: '500',
+    radius: middle.radius,
     limit: 10
   }
 
