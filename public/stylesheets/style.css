@@ -117,10 +117,15 @@ textarea{
 .directions {
   margin: 10px;
   font-family: 'Raleway', sans-serif;
+  font-size: .9em;
 }
 
 .directions div{
   margin-bottom: 5px;
+}
+
+.mapbox-directions-way-name {
+  font-weight: bold;
 }
 
 button{
