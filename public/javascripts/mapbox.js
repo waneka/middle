@@ -87,8 +87,8 @@ var Map = {
       var merged = []
       merged = merged.concat.apply(merged, geoLocations)
       this.venueLayer.setGeoJSON(merged)
-      this.bindDirectionsEvent(this.userOneDirectionsLayer, this.startingPoints[0], Map.venueLayer)
-      this.bindDirectionsEvent(this.userTwoDirectionsLayer, this.startingPoints[1], Map.venueLayer)
+      this.bindDirectionsEvent(this.userOneDirectionsLayer, 0, Map.venueLayer)
+      this.bindDirectionsEvent(this.userTwoDirectionsLayer, 1, Map.venueLayer)
     }
   },
 
@@ -98,7 +98,7 @@ var Map = {
         type: 'POST',
         url: '/directions',
         data: {
-          pointOne: human.location,
+          pointOne: Map.startingPoints[human].location,
           pointTwo: e.layer.feature.geometry.coordinates
         },
         dataType: 'json'
