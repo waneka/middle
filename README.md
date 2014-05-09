@@ -1,24 +1,30 @@
 ##Middle
-Find a central meeting place. Given your current location and the location of a friend, search for cafes, restaurants and/or bars in the area between you. Clicking on a map pin displays two sets of directions for getting there (one for each of you). You can also click to email driving directions to your friend. Middle won "Best Overall" at the 2013 Dev Bootcamp Holiday Hackathon.
+Find a central meeting place. Given your current location and the location of a friend, search for cafes, restaurants and/or bars in the area between you. Clicking on a map pin displays two sets of directions for getting there (one for each of you).
 
-Demo it here: http://waneka.github.io/middle
+Demo it here: http://meetinthemiddle.herokuapp.com/
 
 ####Technologies:
 * Javascript, HTML, CSS
-* Google Maps API, Places Library, and Directions Service
+* Mapbox, Mapbox Directions API
+* Foursquare API
 * Gravatar
 * Font Awesome Icons
 
 ####Development:
-In development, run a local server, for instance:
+In development, install npm dependencies
 
 ```
-python -m SimpleHTTPServer
+npm install
+```
+then fire up the node server
+
+```
+node server.js
 ```
 
 ####Deploying to production:
-To deploy the code, you must push the code to a branch called gh-pages. Simply run the following command:
+To deploy the code, you must push the code to heroku. Make sure the master branch is up to date, then:
 
-````
-git push origin master:gh-pages
-````
+```
+git push heroku master
+```
