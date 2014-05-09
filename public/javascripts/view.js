@@ -23,6 +23,38 @@ var View = {
 		}
 	},
 
+	displaySteps: function(human, steps) {
+		var container = document.getElementById('directions' + (human+1))
+		container.innerHTML = ''
+		steps.forEach(function(step) {
+			console.log(step.maneuver.type)
+			var direction = document.createElement('div')
+			var icon
+			var rightRegExp = /right/g
+			var leftRegExp = /left/g
+			if (step.maneuver.type === 'continue') {
+				icon = '<i class="fa fa-arrows-v"></i> '
+			} else if (step.maneuver.type === 'depart') {
+				icon = '<i class="fa fa-road"></i> '
+			} else if (step.maneuver.type === 'arrive') {
+				icon = '<i class="fa fa-bullseye"></i> '
+			} else if (step.maneuver.type === 'u-turn') {
+				icon = '<i class="fa fa-repeat"></i> '
+			} else if (step.maneuver.type === 'enter roundabout') {
+				icon = '<i class="fa fa-spinner"></i> '
+			} else if (rightRegExp.test(step.maneuver.type)) {
+				icon = '<i class="fa fa-share"></i> '
+			} else if (leftRegExp.test(step.maneuver.type)) {
+				icon = '<i class="fa fa-reply"></i> '
+			} else {
+				icon = '<i class="fa fa-tachometer"></i> '
+			}
+
+			direction.innerHTML = icon + step.maneuver.instruction + '<br>'
+			container.appendChild(direction)
+		})
+	},
+
 	setInitialVenue: function(type) {
 		var button = document.getElementById(type)
 		button.classList.add('symbol-active')

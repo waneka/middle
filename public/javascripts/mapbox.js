@@ -106,6 +106,8 @@ var Map = {
         var geoArray = data.routes[0].geometry.coordinates
         Map.drawRoute(geoArray, dirLayer)
 
+        var steps = data.routes[0].steps
+        View.displaySteps(human, steps)
       })
     })
   },

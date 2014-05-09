@@ -20,7 +20,7 @@ exports.directions = function(req, res) {
   var secondLocation = req.body.pointTwo[0] + ',' + req.body.pointTwo[1]
 
   var options = {
-    url: 'http://api.tiles.mapbox.com/v3/waneka.i5nnfp13/directions/driving/' + firstLocation + ';' + secondLocation + '.json'
+    url: 'http://api.tiles.mapbox.com/v3/waneka.i5nnfp13/directions/driving/' + firstLocation + ';' + secondLocation + '.json?instructions=html'
   }
 
   request(options, function(err, response, body) {

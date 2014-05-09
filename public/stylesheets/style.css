@@ -114,8 +114,13 @@ textarea{
   font-size:1em;
 }
 
-.directions1, .directions2 {
+.directions {
   margin: 10px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.directions div{
+  margin-bottom: 5px;
 }
 
 button{
