@@ -14,6 +14,24 @@ exports.middle = function(req, res) {
   res.render('middle', { title: 'Middle' })
 }
 
+exports.directions = function(req, res) {
+
+  var firstLocation = req.body.pointOne[1] + ',' + req.body.pointOne[0]
+  var secondLocation = req.body.pointTwo[0] + ',' + req.body.pointTwo[1]
+
+  var options = {
+    url: 'http://api.tiles.mapbox.com/v3/waneka.i5nnfp13/directions/driving/' + firstLocation + ';' + secondLocation + '.json?instructions=html'
+  }
+
+  request(options, function(err, response, body) {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(body)
+    }
+  })
+}
+
 exports.places = function(req, res) {
   var middle = req.body.middle
   var locationType = req.body.type

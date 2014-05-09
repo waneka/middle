@@ -9,8 +9,10 @@ var Map = {
     this.map = L.mapbox.map('map', 'waneka.i5nnfp13').on('viewreset', function() {
       callback()
     })
-    this.featureLayer = L.mapbox.featureLayer().addTo(this.map)
+    this.venueLayer = L.mapbox.featureLayer().addTo(this.map)
     this.humanLayer = L.mapbox.featureLayer().addTo(this.map)
+    this.userOneDirectionsLayer = L.mapbox.featureLayer().addTo(this.map)
+    this.userTwoDirectionsLayer = L.mapbox.featureLayer().addTo(this.map)
   },
 
   findLocation: function(address, email) {
@@ -77,9 +79,6 @@ var Map = {
   },
 
   populateTheMiddle: function() {
-    // check the dom for which location types are selected
-    // populate the map based on these types
-    // this function can be called when the buttons are clicked, as well as when the results have finished returning.
     if (this.initLoad === true) {
       var geoLocations = []
       this.locationTypes.forEach(function(type) {
@@ -87,8 +86,42 @@ var Map = {
       })
       var merged = []
       merged = merged.concat.apply(merged, geoLocations)
-      Map.featureLayer.setGeoJSON(merged)
+      this.venueLayer.setGeoJSON(merged)
+      this.bindDirectionsEvent(this.userOneDirectionsLayer, 0, Map.venueLayer)
+      this.bindDirectionsEvent(this.userTwoDirectionsLayer, 1, Map.venueLayer)
     }
+  },
+
+  bindDirectionsEvent: function(dirLayer, human, layer) {
+    layer.on('click', function(e) {
+      $.ajax({
+        type: 'POST',
+        url: '/directions',
+        data: {
+          pointOne: Map.startingPoints[human].location,
+          pointTwo: e.layer.feature.geometry.coordinates
+        },
+        dataType: 'json'
+      }).success(function(data) {
+        var geoArray = data.routes[0].geometry.coordinates
+        Map.drawRoute(geoArray, dirLayer)
+
+        var steps = data.routes[0].steps
+        View.displaySteps(human, steps)
+      })
+    })
+  },
+
+  drawRoute: function(geoArray, dirLayer) {
+    var arryLength = geoArray.length
+    var geoJSON = {
+      "type": "LineString",
+      "coordinates": []
+    }
+    for (var i=0;i<arryLength;i++) {
+      geoJSON.coordinates[i] = geoArray[i]
+    }
+    dirLayer.setGeoJSON(geoJSON)
   },
 
   addMarkers: function(type) {
@@ -150,7 +183,7 @@ var Map = {
         Map.initLoad = true
         Map.locationTypes.push(type)
         var geoLocations = Map.addMarkers(type)
-        Map.featureLayer.setGeoJSON(geoLocations)
+        Map.venueLayer.setGeoJSON(geoLocations)
         View.setInitialVenue(type)
       }
       callback()
