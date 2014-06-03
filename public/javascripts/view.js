@@ -22,18 +22,17 @@ var View = {
 		$('.directions-console').toggleClass('hidden')
 	},
 
-	showLocOneDirections: function() {
-		$('#directions2').addClass('hidden')
-		$('#directions1').removeClass('hidden')
-		$('#dir-loc-two').removeClass('button-active')
-		$('#dir-loc-one').addClass('button-active')
+	adjustDirLocButtons: function() {
+		$('.directions-toggle').addClass('hidden')
+		var locations = Map.startingPoints.length
+		for (var i=0;i<locations;i++) {
+			$('#dir-loc' + (i + 1)).removeClass('hidden')
+		}
 	},
 
-	showLocTwoDirections: function() {
-		$('#directions1').addClass('hidden')
-		$('#directions2').removeClass('hidden')
-		$('#dir-loc-one').removeClass('button-active')
-		$('#dir-loc-two').addClass('button-active')
+	showLocDirections: function(num) {
+		$('.directions').addClass('hidden')
+		$('#directions' + num).removeClass('hidden')
 	},
 
 	showVenueInfo: function() {
@@ -51,6 +50,12 @@ var View = {
 			} else {
 				Map.findLocation(address, function() {
 					Map.recenterMap()
+					View.adjustDirLocButtons()
+					if (Map.startingPoints.length === 4) {
+						var button = $('.loc-two-submit')
+						button.addClass('disabled')
+						button.attr('disabled', 'disabled')
+					}
 				})
 			}
 		})
