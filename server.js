@@ -29,7 +29,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
+app.get('/', routes.middle);
 app.get('/middle', routes.middle);
 app.post('/places', routes.places)
 app.post('/directions', routes.directions)
