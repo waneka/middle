@@ -243,10 +243,18 @@ var Map = {
   },
 
   findTheMiddle: function() {
+    var humans = this.startingPoints.length
+    var latTotal = 0,
+      lngTotal = 0
+    for (var i=0;i<humans;i++) {
+      latTotal += this.startingPoints[i].location[1]
+      lngTotal += this.startingPoints[i].location[0]
+    }
+
     var pythagorean = Math.pow((this.startingPoints[0].location[0] - this.startingPoints[1].location[0]),2) + Math.pow((this.startingPoints[0].location[1] - this.startingPoints[1].location[1]),2)
     return {
-      lat: (this.startingPoints[0].location[1] + this.startingPoints[1].location[1])/2,
-      lng: (this.startingPoints[0].location[0] + this.startingPoints[1].location[0])/2,
+      lat: (latTotal)/humans,
+      lng: (lngTotal)/humans,
       radius: (Math.sqrt(pythagorean) * 10000)
     }
   }
