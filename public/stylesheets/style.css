@@ -156,7 +156,15 @@ body {
 }
 
 #directions2 i {
-  color: #c0392b ;
+  color: #c0392b;
+}
+
+#directions3 i {
+  color: #2980b9;
+}
+
+#directions4 i {
+  color: #d35400;
 }
 
 .fa-spin {
