@@ -1,36 +1,133 @@
 <% layout('layout') -%>
 <div class="the-whole-page">
-  <div class="left">
+
+  <div class="map-container">
+    <div class="button-holder-wide">
+      <div class="button-holder hidden">
+        <button class="symbol" data-id='coffee' id="coffee"><i class="fa fa-coffee"></i></button>
+        <button class="symbol" data-id='food' id="food"><i class="fa fa-cutlery"></i></button>
+        <button class="symbol" data-id='drinks' id="drinks"><i class="fa fa-glass"></i></button>
+      </div>
+    </div>
+
+    <div class="location-console hidden">
+      <form class="loc-two-form" action="#" method="POST">
+        <div class="loc-input-container">
+          <input class="loc-two-input" id="address" type="text" name="address" placeholder="Address"><br>
+          <input class="loc-two-input" id="city" type="text" name="city" placeholder="City"><br>
+        </div>
+        <input class="location-form loc-two-submit" type="submit" value="go">
+      </form>
+    </div>
+
+    <div class="venue-info hidden">
+      <div id="venue-info-top"></div>
+      <div id="venue-info-bottom"></div>
+    </div>
+
+    <div class="directions-console hidden">
+      <div class="dir-buttons-container">
+        <button class="directions-toggle active" id="dir-loc-one" onclick="View.showLocOneDirections()">Location 1</button>
+        <button class="directions-toggle" id="dir-loc-two" onclick="View.showLocTwoDirections()">Location 2</button>
+      </div>
+      <div id="directions1" class="directions">Directions1</div>
+      <div id="directions2" class="directions hidden">Directions2</div>
+    </div>
+
+    <div id='map'></div>
+
+    <div class="logo">
+      <span class="red">meet</span><span class="grey"> in </span>the middle
+    </div>
+
+  </div>
+</div>
+
+<div id="overlay">
+  <div id="overlay-container">
+    <div class="find-location">
+      <div>
+        <button class="landing-button" onclick="Map.geoLocation()">Find My Location</button><br>
+        <div class="spinner hidden"><i class="fa fa-spinner fa-spin"></i></div>
+      </div>
+      <button class="landing-button" onclick="View.enterAddress()">Enter an Address</button>
+    </div>
+    <div class="geo-error hidden">Oops! That feature is not allowed in your browser.</div>
+
+    <form class="enter-address hidden" action="#" method="POST">
+      Enter your address below to get started.<br>
+      <input class='landing-input' type="text" name="address" placeholder="Address"><br>
+      <input class='landing-input' type="text" name="city" placeholder="City"><br>
+      <input class="location-form landing-form-submit" type="submit">
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript" src='/javascripts/mapbox.js'></script>
+<script type="text/javascript" src='/javascripts/view.js'></script>
+<script type="text/javascript" src='/javascripts/app.js'></script>
+<script id='venue-template-top' type="x-tmpl-mustache">
+  <div class='title-address'>
+    <div class="venue-title">{{venue.name}}</div>
+    <div>{{venue.location.address}}</div>
+    <div>{{venue.location.city}}, {{venue.location.state}} {{venue.location.zipcode}}</div>
+  </div>
+  {{#photo}}<div class='venue-img'><img src="{{photo}}"></div>{{/photo}}
+</script>
+<script id='venue-template-bottom' type='x-tmpl-mustache'>
+  <div class='rating-price-menu'>
+    <span class='venue-rating'>
+    {{#rating.stars}}
+      <i class="fa {{type}}"></i>
+    {{/rating.stars}}
+    </span>
+    <span class='venue-price'>
+    {{#price}}  |  {{price}}
+    {{/price}}
+    </span>
+    <span class='venue-menu'>
+    {{#venue.menu.url}}  |  <a href="{{venue.menu.url}}">Menu</a>
+    {{/venue.menu.url}}
+    </span>
+    <span class='venue-reservations'>
+    {{#venue.reservations.url}}  |  <a href="{{venue.reservations.url}}">Reservations</a>
+    {{/venue.reservations.url}}
+    </span>
+  </div>
+  <div class='bottom-container'>
+    <div class='website-phone-twitter'>
+      {{#venue.url}}
+        <span><a href="{{venue.url}}">website</a></span>
+      {{/venue.url}}
+      {{#venue.contact.twitter}}
+        <span>  |  <a href="http://twitter.com/{{venue.contact.twitter}}">@{{venue.contact.twitter}}</a></span>
+      {{/venue.contact.twitter}}
+      {{#venue.contact.formattedPhone}}
+        <div>{{venue.contact.formattedPhone}}</div>
+      {{/venue.contact.formattedPhone}}
+    </div>
+    <button class='venue-directions-button' onclick='View.toggleDirectionsWindow()'>Directions <i class="fa fa-arrows-alt"></i></button>
+  </div>
+</script>
+
+
+
+<!--   <div class="left">
     <img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=http://slacktiverse.files.wordpress.com/2013/03/fuzzy-white-kitten-with-stubby-legs-from-sam_ayye-sam-pertsas.jpg" alt="Left Side User" class="gravatar" id="gravatar-left">
     <textarea id="address1" placeholder="Person 1 Address"></textarea>
     <div class="update">
      <button class="update-button">Update Address</button>
    </div>
    <div id="directions1" class="directions"></div>
- </div>
- <div class="middle">
-  <div class="header">
-    <h1><span class="red">meet</span><span class="grey"> in </span>the middle</h1>
-  </div>
-  <div class="button-holder-wide">
-   <div class="button-holder">
-    <button class="symbol" data-id='coffee' id="coffee"><i class="fa fa-coffee"></i></button>
-    <button class="symbol" data-id='food' id="food"><i class="fa fa-cutlery"></i></button>
-    <button class="symbol" data-id='drinks' id="drinks"><i class="fa fa-glass"></i></button>
-  </div>
-</div>
-<div id='map'></div>
+ </div> -->
 
-</div>
-<div class="right">
+  <!-- <a href='#' onclick='View.overlay()'>Click here to show the overlay</a> -->
+
+<!-- <div class="right">
   <img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=http://i.dailymail.co.uk/i/pix/2012/07/03/article-2168112-13E70C13000005DC-867_964x946.jpg" alt="Right Side User" class="gravatar" id="gravatar-right">
   <textarea id="address2" placeholder="Person 2 Address"></textarea>
   <div class="update">
    <button class="update-button">Update Address</button>
  </div>
  <div id="directions2" class="directions"></div>
-</div>
-</div>
-<script type="text/javascript" src='/javascripts/mapbox.js'></script>
-<script type="text/javascript" src='/javascripts/view.js'></script>
-<script type="text/javascript" src='/javascripts/app.js'></script>
+</div> -->

@@ -16,7 +16,7 @@ exports.middle = function(req, res) {
 
 exports.directions = function(req, res) {
 
-  var firstLocation = req.body.pointOne[1] + ',' + req.body.pointOne[0]
+  var firstLocation = req.body.pointOne[0] + ',' + req.body.pointOne[1]
   var secondLocation = req.body.pointTwo[0] + ',' + req.body.pointTwo[1]
 
   var options = {
@@ -44,7 +44,8 @@ exports.places = function(req, res) {
     ll: middle.lat + ',' + middle.lng,
     section: locationType,
     radius: middle.radius,
-    limit: 10
+    limit: 10,
+    venuePhotos: 1
   }
 
   var options = {
