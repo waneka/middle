@@ -51,6 +51,11 @@ var View = {
 			} else {
 				Map.findLocation(address, function() {
 					Map.recenterMap()
+					if (Map.startingPoints.length === 4) {
+						var button = $('.loc-two-submit')
+						button.addClass('disabled')
+						button.attr('disabled', 'disabled')
+					}
 				})
 			}
 		})

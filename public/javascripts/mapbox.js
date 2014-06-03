@@ -12,6 +12,8 @@ var Map = {
     this.humanLayer = L.mapbox.featureLayer().addTo(this.map)
     this.userOneDirectionsLayer = L.mapbox.featureLayer().addTo(this.map)
     this.userTwoDirectionsLayer = L.mapbox.featureLayer().addTo(this.map)
+    this.userThreeDirectionsLayer = L.mapbox.featureLayer().addTo(this.map)
+    this.userFourDirectionsLayer = L.mapbox.featureLayer().addTo(this.map)
   },
 
   geoLocation: function() {
@@ -48,11 +50,11 @@ var Map = {
     var humanLocations = []
     var counter = 0
     this.startingPoints.forEach(function(point) {
-      var color
-      if (counter === 0) {
-        color = "#16a085"
-      } else {
-        color = "#c0392b"
+      var colors = {
+        0: "#16a085",
+        1: "#c0392b",
+        2: "#2980b9",
+        3: "#d35400"
       }
       var geoJSON = {
           "type": "Feature",
@@ -62,7 +64,7 @@ var Map = {
           },
           "properties": {
             "title": "Human",
-            "marker-color": color,
+            "marker-color": colors[counter],
             "marker-size": "large",
             "marker-symbol": "star-stroked"
           }
@@ -144,11 +146,17 @@ var Map = {
       var merged = []
       merged = merged.concat.apply(merged, geoLocations)
       this.venueLayer.setGeoJSON(merged)
-      this.bindDirectionsEvent(this.userOneDirectionsLayer, 0, Map.venueLayer)
-      this.bindDirectionsEvent(this.userTwoDirectionsLayer, 1, Map.venueLayer)
+      this.bindDirections()
       this.bindVenueInfo(Map.venueLayer)
       View.showVenueButtons()
     }
+  },
+
+  bindDirections: function() {
+    this.bindDirectionsEvent(this.userOneDirectionsLayer, 0, Map.venueLayer)
+    this.bindDirectionsEvent(this.userTwoDirectionsLayer, 1, Map.venueLayer)
+    this.bindDirectionsEvent(this.userThreeDirectionsLayer, 2, Map.venueLayer)
+    this.bindDirectionsEvent(this.userFourDirectionsLayer, 3, Map.venueLayer)
   },
 
   bindVenueInfo: function(layer) {
@@ -197,27 +205,29 @@ var Map = {
   },
 
   bindDirectionsEvent: function(dirLayer, human, layer) {
-    layer.on('click', function(e) {
-      var points = {
-        pointOne: Map.startingPoints[human].location,
-        pointTwo: e.layer.feature.geometry.coordinates
-      }
-      $.ajax({
-        type: 'POST',
-        url: '/directions',
-        data: points,
-        dataType: 'json'
-      }).success(function(data) {
-        var geoArray = data.routes[0].geometry.coordinates
-        Map.drawRoute(geoArray, dirLayer)
+    if (Map.startingPoints[human]) {
+      layer.on('click', function(e) {
+        var points = {
+          pointOne: Map.startingPoints[human].location,
+          pointTwo: e.layer.feature.geometry.coordinates
+        }
+        $.ajax({
+          type: 'POST',
+          url: '/directions',
+          data: points,
+          dataType: 'json'
+        }).success(function(data) {
+          var geoArray = data.routes[0].geometry.coordinates
+          Map.drawRoute(geoArray, dirLayer, human)
 
-        var steps = data.routes[0].steps
-        View.displaySteps(human, steps)
+          var steps = data.routes[0].steps
+          View.displaySteps(human, steps)
+        })
       })
-    })
+    }
   },
 
-  drawRoute: function(geoArray, dirLayer) {
+  drawRoute: function(geoArray, dirLayer, human) {
     var arryLength = geoArray.length
     var geoJSONObject = {
       "type": "LineString",
@@ -226,18 +236,17 @@ var Map = {
     for (var i=0;i<arryLength;i++) {
       geoJSONObject.coordinates[i] = geoArray[i]
     }
-    var color
-    if (dirLayer._leaflet_id === 31) {
-      color = "#16a085"
-    } else {
-      color = "#c0392b"
+    var colors = {
+      0: "#16a085",
+      1: "#c0392b",
+      2: "#2980b9",
+      3: "#d35400"
     }
     var stylezzz = {
-      color: color,
+      color: colors[human],
       weight: 4,
       opacity: 0.8
     }
-
     dirLayer.setGeoJSON(geoJSONObject)
     dirLayer.setStyle(stylezzz)
   },
