@@ -1,5 +1,7 @@
-var View = {
+function View() {
+}
 
+View.prototype = {
 	init: function() {
 		this.overlay()
 		this.makeSymbolsClickable()

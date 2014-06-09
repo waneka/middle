@@ -5,6 +5,7 @@ html {
 body {
   margin:0;
   font-family: 'Roboto', sans-serif;
+  font-weight: 300;
   height: 100%;
 }
 
@@ -82,7 +83,7 @@ body {
 
 .venue-title {
   font-size: 1.25em;
-  font-weight: 700;
+  font-weight: 400;
   width: 220px;
 }
 
