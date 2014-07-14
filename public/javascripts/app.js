@@ -4,8 +4,8 @@ function Controller(map) {
 }
 
 window.onload = function() {
-  Map = new Map()
-  App = new Controller(Map)
-  View = new View()
-  View.init()
+  map = new Map()
+  app = new Controller(map)
+  view = new View()
+  view.init()
 }
