@@ -1,11 +1,11 @@
-var App = {
-  init: function(map) {
-    this.map = map
-    this.map.init()
-  }
+function Controller(map) {
+  this.map = map
+  this.map.init()
 }
 
 window.onload = function() {
-  App.init(Map)
+  Map = new Map()
+  App = new Controller(Map)
+  View = new View()
   View.init()
 }

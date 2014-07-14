@@ -1,4 +1,14 @@
-var Map = {
+function Markers() {}
+
+Markers.prototype = {
+  locationTypes: [],
+  venueInfo: {},
+
+}
+
+function Map() {}
+
+Map.prototype = {
   startingPoints: [],
   locationTypes: [],
   venueInfo: {},
@@ -8,6 +18,7 @@ var Map = {
   init: function() {
     this.map = L.mapbox.map('map', 'waneka.i5nnfp13', {zoomControl: false})
     new L.Control.Zoom({ position: 'topright' }).addTo(this.map)
+
     this.venueLayer = L.mapbox.featureLayer().addTo(this.map)
     this.humanLayer = L.mapbox.featureLayer().addTo(this.map)
     this.userOneDirectionsLayer = L.mapbox.featureLayer().addTo(this.map)
@@ -268,4 +279,6 @@ var Map = {
     }
   }
 }
+
+
 

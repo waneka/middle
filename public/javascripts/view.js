@@ -1,5 +1,7 @@
-var View = {
+function View() {
+}
 
+View.prototype = {
 	init: function() {
 		this.overlay()
 		this.makeSymbolsClickable()
@@ -16,6 +18,7 @@ var View = {
 
 	showLocationsWindow: function() {
 		$('.location-console').removeClass('hidden')
+		$('.loc-two-instructions').removeClass('hidden')
 	},
 
 	toggleDirectionsWindow: function() {
@@ -48,6 +51,7 @@ var View = {
 			if (Map.startingPoints.length === 0) {
 				Map.initialManualLocation(address)
 			} else {
+				View.hideInstructions()
 				Map.findLocation(address, function() {
 					Map.recenterMap()
 					View.adjustDirLocButtons()
@@ -59,6 +63,10 @@ var View = {
 				})
 			}
 		})
+	},
+
+	hideInstructions: function() {
+		$('.loc-two-instructions').addClass('hidden')
 	},
 
 	enterAddress: function() {
