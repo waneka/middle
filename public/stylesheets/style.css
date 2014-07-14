@@ -18,6 +18,14 @@ body {
   display: none;
 }
 
+.greeting {
+  font-size: 2em;
+  color: white;
+  background: #c0392b;
+  width: 60%;
+  margin: auto;
+}
+
 .header {
   width: 100%;
   text-align: center;
@@ -171,7 +179,7 @@ body {
 .fa-spin {
   font-size: 4em;
   position: absolute;
-  top: 118px;
+  top: 160px;
   right: 48%;
   color: #16a085;
 }
@@ -210,6 +218,17 @@ body {
   margin: auto;
   background: #2c3e50;
   color: white;
+}
+
+.loc-two-instructions {
+  position: absolute;
+  top: 24px;
+  left: 405px;
+  z-index: 10;
+  background: #c0392b;
+  font-size: 1.5em;
+  color: white;
+  padding: 5px;
 }
 
 button{

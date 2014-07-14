@@ -18,6 +18,7 @@ View.prototype = {
 
 	showLocationsWindow: function() {
 		$('.location-console').removeClass('hidden')
+		$('.loc-two-instructions').removeClass('hidden')
 	},
 
 	toggleDirectionsWindow: function() {
@@ -50,6 +51,7 @@ View.prototype = {
 			if (Map.startingPoints.length === 0) {
 				Map.initialManualLocation(address)
 			} else {
+				View.hideInstructions()
 				Map.findLocation(address, function() {
 					Map.recenterMap()
 					View.adjustDirLocButtons()
@@ -61,6 +63,10 @@ View.prototype = {
 				})
 			}
 		})
+	},
+
+	hideInstructions: function() {
+		$('.loc-two-instructions').addClass('hidden')
 	},
 
 	enterAddress: function() {
